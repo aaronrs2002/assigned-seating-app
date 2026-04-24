@@ -31,7 +31,7 @@
 
         </circle>
         <text x="150" y="100" font-size="25" text-anchor="middle" fill="white">Table 1</text>
-    </svg>-->
+    </svg>
 
     <svg width="1500" height="900">
         <circle class="table" data-table="1" onClick="reset(1)" fill="green" cx="150" cy="100" r="80" />
@@ -59,17 +59,62 @@
         <rect x="425" y="250" class="table" data-table="7" onClick="reset(7)" fill="green" />
         <text x="550" y="325" font-size="25" text-anchor="middle" fill="white">Table 7</text>
 
-    </svg>
-
+    </svg>-->
+    <svg id="restaurantLayout" width="1500" height="900"></svg>
 
 
     <script>
-        /*  const circle = document.getElementById("circle");
-  
-          circle.addEventListener("click", () => {
-              // Stop animation and force green
-              circle.style.fill = 'red'; // Set to your desired color
-          });*/
+        const svg = document.getElementById("restaurantLayout");
+
+        const totalTables = 100;
+
+        const columns = 10;
+        const rows = 10;
+
+        const startX = 80;
+        const startY = 70;
+
+        const spacingX = 145;
+        const spacingY = 82;
+
+        const tableRadius = 32;
+
+        const svgNS = "http://www.w3.org/2000/svg";
+
+        for (let i = 1; i <= totalTables; i++) {
+            const col = (i - 1) % columns;
+            const row = Math.floor((i - 1) / columns);
+
+            const cx = startX + col * spacingX;
+            const cy = startY + row * spacingY;
+
+            const circle = document.createElementNS(svgNS, "circle");
+            circle.setAttribute("class", "table");
+            circle.setAttribute("data-table", i);
+            circle.setAttribute("fill", "green");
+            circle.setAttribute("cx", cx);
+            circle.setAttribute("cy", cy);
+            circle.setAttribute("r", tableRadius);
+
+            circle.addEventListener("click", function () {
+                const currentFill = this.getAttribute("fill");
+
+                if (currentFill === "red") {
+                    this.setAttribute("fill", "green");
+                } else {
+                    this.setAttribute("fill", "red");
+                }
+            });
+
+            const label = document.createElementNS(svgNS, "text");
+            label.setAttribute("class", "table-label");
+            label.setAttribute("x", cx);
+            label.setAttribute("y", cy);
+            label.textContent = "Table " + i;
+
+            svg.appendChild(circle);
+            svg.appendChild(label);
+        }
 
 
         function reset(num) {
