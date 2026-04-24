@@ -7,57 +7,57 @@
     <title>SVG Seating</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+    <style>
+        .table {
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
     <h1>Restaurant tables</h1>
 
-    <svg version="1.1" width="1200" height="900" xmlns="http://www.w3.org/2000/svg">
+    <!--  <svg version="1.1" width="1200" height="900" xmlns="http://www.w3.org/2000/svg">
 
 
 
-        <circle cx="150" cy="100" r="80" fill="green" id="table1">
+     <circle cx="150" cy="100" r="80" fill="green" id="table1">
             <animate attributeName="fill" from="green" to="red" dur="10s" fill="freeze" />
 
         </circle>
         <text x="150" y="100" font-size="25" text-anchor="middle" fill="white">Table 1</text>
+    </svg>-->
+
+    <svg width="1200" height="900">
+        <circle class="table" data-table="1" onClick="reset(1)" fill="green" cx="150" cy="100" r="80" />
+        <text x="150" y="100" font-size="25" text-anchor="middle" fill="white">Table 1</text>
+
+        <circle class="table" data-table="2" onClick="reset(2)" fill="green" cx="400" cy="100" r="80" />
+        <text x="400" y="100" font-size="25" text-anchor="middle" fill="white">Table 2</text>
+
+        <circle class="table" data-table="3" onClick="reset(3)" fill="green" cx="650" cy="100" r="80" />
+        <text x="650" y="100" font-size="25" text-anchor="middle" fill="white">Table 3</text>
+
     </svg>
 
-    <svg width="200" height="200" viewBox="0 0 200 200">
-        <circle id="circle" cx="100" cy="100" r="80" />
-    </svg>
 
-    <style>
-        #circle {
-            fill: red;
-            animation: colorChange 10s linear forwards;
-            cursor: pointer;
-        }
-
-        @keyframes colorChange {
-            from {
-                fill: red;
-            }
-
-            to {
-                fill: green;
-            }
-        }
-
-        /* This class forces it to stay green */
-        .force-red {
-            animation: none;
-            fill: red;
-        }
-    </style>
 
     <script>
-        const circle = document.getElementById("circle");
+        /*  const circle = document.getElementById("circle");
+  
+          circle.addEventListener("click", () => {
+              // Stop animation and force green
+              circle.style.fill = 'red'; // Set to your desired color
+          });*/
 
-        circle.addEventListener("click", () => {
-            // Stop animation and force green
-            circle.classList.add("force-red");
-        });
+
+        function reset(num) {
+            if (document.querySelector(".table[data-table='" + num + "']").style.fill === 'red') {
+                document.querySelector(".table[data-table='" + num + "']").style.fill = "green"
+            } else {
+                document.querySelector(".table[data-table='" + num + "']").style.fill = "red"
+            }
+        }
     </script>
 
 
