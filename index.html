@@ -11,6 +11,11 @@
         .table {
             cursor: pointer;
         }
+
+        rect {
+            width: 250px !important;
+            height: 150px !important;
+        }
     </style>
 </head>
 
@@ -28,7 +33,7 @@
         <text x="150" y="100" font-size="25" text-anchor="middle" fill="white">Table 1</text>
     </svg>-->
 
-    <svg width="1200" height="900">
+    <svg width="1500" height="900">
         <circle class="table" data-table="1" onClick="reset(1)" fill="green" cx="150" cy="100" r="80" />
         <text x="150" y="100" font-size="25" text-anchor="middle" fill="white">Table 1</text>
 
@@ -37,6 +42,22 @@
 
         <circle class="table" data-table="3" onClick="reset(3)" fill="green" cx="650" cy="100" r="80" />
         <text x="650" y="100" font-size="25" text-anchor="middle" fill="white">Table 3</text>
+
+
+
+        <circle class="table" data-table="4" onClick="reset(4)" fill="green" cx="900" cy="100" r="80" />
+        <text x="900" y="100" font-size="25" text-anchor="middle" fill="white">Table 4</text>
+
+        <circle class="table" data-table="5" onClick="reset(5)" fill="green" cx="1150" cy="100" r="80" />
+        <text x="1150" y="100" font-size="25" text-anchor="middle" fill="white">Table 5</text>
+
+
+
+        <rect x="75" y="250" class="table" data-table="6" onClick="reset(6)" fill="green" />
+        <text x="200" y="325" font-size="25" text-anchor="middle" fill="white">Table 6</text>
+
+        <rect x="425" y="250" class="table" data-table="7" onClick="reset(7)" fill="green" />
+        <text x="550" y="325" font-size="25" text-anchor="middle" fill="white">Table 7</text>
 
     </svg>
 
