@@ -1,0 +1,16 @@
+[
+    {
+        "fName": "Greg",
+        "lName": "Johnson",
+        "tableNum": 1,
+        "phone": "555-909-6464",
+        "email": "gregJohnson@email.com",
+        "hotelInfo": "Hyatt",
+        "flightInfo": "American-7234",
+        "carRentalInfo": "Enterprise",
+        "optionalMessage": "Vegan meals",
+        "attending": "yes",
+        "guestType": "StandardGuest",
+        "guestImg": "img/guests/GregJohnson.jpg"
+    }
+]
