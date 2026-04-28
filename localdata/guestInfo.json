@@ -2,15 +2,54 @@
     {
         "fName": "Greg",
         "lName": "Johnson",
-        "tableNum": 1,
         "phone": "555-909-6464",
         "email": "gregJohnson@email.com",
-        "hotelInfo": "Hyatt",
-        "flightInfo": "American-7234",
-        "carRentalInfo": "Enterprise",
-        "optionalMessage": "Vegan meals",
-        "attending": "yes",
-        "guestType": "StandardGuest",
-        "guestImg": "img/guests/GregJohnson.jpg"
+        "guestImg": "img/guests/GregJohnson.jpg",
+        "events": [
+            {
+                "account": "2026-04-28-Smith Wedding",
+                "eventTitle": "Rehersal Dinner",
+                "hotelInfo": "Hyatt",
+                "flightInfo": "American-7234",
+                "carRentalInfo": "Enterprise",
+                "optionalMessage": "Vegan meals",
+                "attending": "yes",
+                "guestType": "StandardGuest",
+                "seatAssignment": "table 4"
+            },
+            {
+                "account": "2026-04-28-Smith Wedding",
+                "eventTitle": "Bachelor Party",
+                "hotelInfo": "Hyatt",
+                "flightInfo": "American-7234",
+                "carRentalInfo": "Enterprise",
+                "optionalMessage": "Vegan meals",
+                "attending": "yes",
+                "guestType": "StandardGuest",
+                "seatAssignment": "NA"
+            },
+            {
+                "account": "2026-04-28-Smith Wedding",
+                "eventTitle": "Bridal Shower",
+                "hotelInfo": "Hyatt",
+                "flightInfo": "American-7234",
+                "carRentalInfo": "Enterprise",
+                "optionalMessage": "Vegan meals",
+                "attending": "no",
+                "guestType": "StandardGuest",
+                "seatAssignment": "NA"
+            },
+            {
+                "account": "2026-04-28-Smith Wedding",
+                "eventTitle": "Wedding Ceremony",
+                "hotelInfo": "Hyatt",
+                "flightInfo": "American-7234",
+                "carRentalInfo": "Enterprise",
+                "optionalMessage": "Vegan meals",
+                "attending": "yes",
+                "guestType": "StandardGuest",
+                "seatAssignment": "Row"
+            }
+        ]
     }
 ]
