@@ -5,9 +5,9 @@
         "phone": "555-909-6464",
         "email": "gregJohnson@email.com",
         "guestImg": "img/guests/GregJohnson.jpg",
+        "account": "2026-04-28-Smith Wedding",
         "events": [
             {
-                "account": "2026-04-28-Smith Wedding",
                 "eventTitle": "Rehersal Dinner",
                 "hotelInfo": "Hyatt",
                 "flightInfo": "American-7234",

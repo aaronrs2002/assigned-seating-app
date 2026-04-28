@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Personal Profile</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/brands.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/solid.css" rel="stylesheet" />
+    <!-- Bootstrap CSS-->
+    <link href="https://bootswatch.com/5/spacelab/bootstrap.css" rel="stylesheet" id="themedStyle">
+
+    <link rel="stylesheet" href="https://aaronrs2002.github.io/black-jack/css/animate.min.css" />
+    <link href="https://aaronrs2002.github.io/black-jack/css/shared.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <h1>Personal Profile</h1>
+                <div class="btn-group form-control p-0" role="group">
+                    <button type="button active" class="btn btn-primary" onClick="toggle('')">Add</button>
+                    <button type="button" class="btn btn-primary" onClick="toggle('editFunction')">Edit</button>
+                </div>
+                <select class="form-control hide" name="guestList" data-toggle="editFunction">
+
+                </select>
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" name="fname" />
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" name="lname" />
+                    <label>Phone</label>
+                    <input type="text" class="form-control" name="phone" />
+                    <label>Email</label>
+                    <input type="text" class="form-control" name="email" />
+                    <label>Guest Image</label>
+                    <input type="text" class="form-control" name="guestImg" />
+                    <div id="guestImgTarget"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="hide alert fadeInUp" role="alert" id="globalAlert"></div>
+    <footer class="footer mt-auto py-3 animated fadeInUp">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="btn-group block my-2" role="group" id="gameLinks"></div>
+                </div>
+                <div class="col-md-2 my-2"> <select class="form-control" onChange="changeTheme()" id="themes"></select>
+                </div>
+                <div class="col-md-4" id="socialList">
+                </div>
+                <div class="col-md-2 my-3" id="year" data-test="test"></div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+<script src="https://aaronrs2002.github.io/black-jack/js/footer.js"></script>
+
+<script>
+
+
+
+    async function fetchGuest() {
+
+
+
+        //  await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait 1 second
+        const response = await fetch("../localdata/guestInfo.json");
+        const contents = await response.json();
+        return contents;
+    }
+
+
+    const buildGuests = async () => {
+
+
+
+        const result = await fetchGuest();
+
+        let guestSelectList = "";
+
+        for (let i = 0; i < result.length; i++) {
+            guestSelectList = guestSelectList + "<option value='" + result[i].fName + " " + result[i].lName + " " + result[i].account + "'>" + result[i].fName + " " + result[i].lName + " " + result[i].account + "</option>"
+        }
+
+
+        document.querySelector("select[name='guestList']").innerHTML = guestSelectList;
+    }; buildGuests();
+
+
+
+</script>
+
+</html>
+
+<!--
+
+        "fName": "Greg",
+        "lName": "Johnson",
+        "phone": "555-909-6464",
+        "email": "gregJohnson@email.com",
+        "guestImg": "img/guests/GregJohnson.jpg",
+-->
