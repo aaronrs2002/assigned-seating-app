@@ -54,8 +54,13 @@
                         <h5 class="card-title d-flex justify-content-center pt-2" id="nameTarget"></h5>
 
                     </div>
+
+                    <select class="form-control" name="accountsTarget" onChange="selectAccount()"></select>
+
+                    <div id="accountDataTarget"></div>
                 </div>
             </div>
+
 
         </div>
 
@@ -115,7 +120,7 @@
     function selectProfile() {
 
         let whichProfile = document.querySelector("select[name='guestList']").value;
-        if (whichProfile === "defauilt") {
+        if (whichProfile === "default") {
             return false;
         }
 
@@ -126,6 +131,64 @@
         document.querySelector("[name='guestImg']").value = guestData[whichProfile].guestImg;
         document.getElementById("guestImgTarget").innerHTML = "<img class='img-fluid' src='" + guestData[whichProfile].guestImg + "' />";
         document.getElementById("nameTarget").innerHTML = guestData[whichProfile].fName + " " + guestData[whichProfile].lName;
+
+        let accountsObj = [];
+
+
+        for (let i = 0; i < guestData[whichProfile].events.length; i++) {
+
+            if (accountsObj.indexOf(guestData[whichProfile].events[i].account) === -1) {
+                accountsObj.push(guestData[whichProfile].events[i].account);
+            }
+        }
+
+
+        console.log("JSON.stringify(accountsObj): " + JSON.stringify(accountsObj));
+
+
+        let accountsTargetHTML = "<option value='default'>Select Account</option>";
+
+        for (let i = 0; i < accountsObj.length; i++) {
+            accountsTargetHTML = accountsTargetHTML + "<option value='" + accountsObj[i] + "'>" + accountsObj[i] + "</option>"
+        }
+
+        document.querySelector("select[name='accountsTarget']").innerHTML = accountsTargetHTML;
+
+
+
+
+
+        /*
+        "events": [
+            {
+                "account": "2026-04-28-Smith Wedding",
+                "eventTitle": "Rehearsal Dinner",
+                "hotelInfo": "Sheraton",
+                "flightInfo": "Delta-4657",
+                "carRentalInfo": "Hertz",
+                "optionalMessage": "Kosher meal",
+                "attending": "yes",
+                "guestType": "StandardGuest",
+                "seatAssignment": "table 18"
+            },
+        */
+
+    }
+
+    function selectAccount() {
+
+        let whichAccount = document.querySelector("select[name='accountsTarget']").value;
+        let whichProfile = document.querySelector("select[name='guestList']").value;
+
+        for (let i = 0; i < guestData[whichProfile].events.length; i++) {
+            if (guestData[whichProfile].events[i].account === whichAccount) {
+                document.getElementById("accountDataTarget").innerHTML = JSON.stringify(guestData[whichProfile].events[i])
+            }
+
+        }
+
+
+        //accountDataTarget
 
     }
 
