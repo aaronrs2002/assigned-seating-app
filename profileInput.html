@@ -19,7 +19,6 @@
 <body>
     <div class="container">
         <div class="row">
-
             <div class="col-md-12">
                 <h1>Personal Profile</h1>
                 <div class="btn-group form-control p-0" role="group">
@@ -30,6 +29,10 @@
                     onChange="selectProfile()">
 
                 </select>
+
+            </div>
+            <div class="col-md-6">
+
                 <div class="form-group">
                     <label>First Name</label>
                     <input type="text" class="form-control" name="fName" />
@@ -41,7 +44,16 @@
                     <input type="text" class="form-control" name="email" />
                     <label>Guest Image</label>
                     <input type="text" class="form-control" name="guestImg" />
-                    <div id="guestImgTarget"></div>
+
+                </div>
+            </div>
+            <div class="col-md-6 hide" data-toggle="editFunction">
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <div id="guestImgTarget" class="d-flex justify-content-center"></div>
+                        <h5 class="card-title d-flex justify-content-center pt-2" id="nameTarget"></h5>
+
+                    </div>
                 </div>
             </div>
 
@@ -111,7 +123,9 @@
         document.querySelector("[name='lName']").value = guestData[whichProfile].lName;
         document.querySelector("[name='phone']").value = guestData[whichProfile].phone;
         document.querySelector("[name='email']").value = guestData[whichProfile].email;
+        document.querySelector("[name='guestImg']").value = guestData[whichProfile].guestImg;
         document.getElementById("guestImgTarget").innerHTML = "<img class='img-fluid' src='" + guestData[whichProfile].guestImg + "' />";
+        document.getElementById("nameTarget").innerHTML = guestData[whichProfile].fName + " " + guestData[whichProfile].lName;
 
     }
 
