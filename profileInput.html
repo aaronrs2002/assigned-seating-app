@@ -31,7 +31,7 @@
                 </select>
 
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
 
                 <div class="form-group">
                     <label>First Name</label>
@@ -47,7 +47,7 @@
 
                 </div>
             </div>
-            <div class="col-md-6 hide" data-toggle="editFunction">
+            <div class="col-md-4 hide" data-toggle="editFunction">
                 <div class="card mt-4">
                     <div class="card-body">
                         <div id="guestImgTarget" class="d-flex justify-content-center"></div>
@@ -55,12 +55,17 @@
 
                     </div>
 
-                    <select class="form-control" name="accountsTarget" onChange="selectAccount()"></select>
 
-                    <div id="accountDataTarget"></div>
+
+
                 </div>
             </div>
-
+            <div class="col-md-4 hide" data-toggle="editFunction">
+                <div class="card mt-4">
+                    <select class="form-control " name="accountsTarget" onChange="selectAccount()"></select>
+                    <div class="card-body" id="accountDataTarget"></div>
+                </div>
+            </div>
 
         </div>
 
@@ -179,15 +184,28 @@
 
         let whichAccount = document.querySelector("select[name='accountsTarget']").value;
         let whichProfile = document.querySelector("select[name='guestList']").value;
-
+        let eventHTML = "";
         for (let i = 0; i < guestData[whichProfile].events.length; i++) {
             if (guestData[whichProfile].events[i].account === whichAccount) {
-                document.getElementById("accountDataTarget").innerHTML = JSON.stringify(guestData[whichProfile].events[i])
+
+                eventHTML = eventHTML + `<ul>
+                    <li>Event Title: ${guestData[whichProfile].events[i].eventTitle}</li>
+                    <li>Hotel Info: ${guestData[whichProfile].events[i].hotelInfo}</li>
+                    <li>Flight Info: ${guestData[whichProfile].events[i].flightInfo}</li>
+                    <li>Car Rental: ${guestData[whichProfile].events[i].carRentalInfo}</li>
+                    <li>Details: ${guestData[whichProfile].events[i].optionalMessage}</li>
+                     <li>Attending: ${guestData[whichProfile].events[i].attending}</li>
+                     <li>Guest Level: ${guestData[whichProfile].events[i].guestType}</li>
+                     <li>Seat Assignment: ${guestData[whichProfile].events[i].seatAssignment}</li>
+                     </ul>`;
+
+
+
             }
 
         }
 
-
+        document.getElementById("accountDataTarget").innerHTML = eventHTML;
         //accountDataTarget
 
     }
