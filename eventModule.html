@@ -18,59 +18,51 @@
 
 <body>
     <div class="container">
+
+
         <div class="row">
+
             <div class="col-md-12">
-                <h1>Personal Profile</h1>
+                <h1>Event Module</h1>
                 <div class="btn-group form-control p-0" role="group">
                     <button type="button active" class="btn btn-primary"
                         onClick="toggle('addFunction'); clearForms();">Add</button>
                     <button type="button" class="btn btn-primary" onClick="toggle('editFunction')">Edit</button>
                 </div>
-                <select class="form-control hide" name="guestList" data-toggle="editFunction"
-                    onChange="selectProfile()">
-
-                </select>
-
             </div>
-            <div class="col-md-4">
 
+            <div class="col-md-6">
                 <div class="form-group">
-                    <label>First Name</label>
-                    <input type="text" class="form-control" name="fName" />
-                    <label>Last Name</label>
-                    <input type="text" class="form-control" name="lName" />
-                    <label>Phone</label>
-                    <input type="text" class="form-control" name="phone" />
-                    <label>Email</label>
-                    <input type="text" class="form-control" name="email" />
-                    <label>Guest Image</label>
-                    <input type="text" class="form-control" name="guestImg" />
 
-                </div>
-            </div>
-            <div class="col-md-4 hide" data-toggle="editFunction">
-                <div class="card mt-4">
-                    <div class="card-body">
-                        <div id="guestImgTarget" class="d-flex justify-content-center"></div>
-                        <h5 class="card-title d-flex justify-content-center pt-2" id="nameTarget"></h5>
-
-                    </div>
-
-
+                    <label>Account</label>
+                    <input type="text" class="form-control" name="accountName" />
+                    <label>Event Date</label>
+                    <input type="text" class="form-control" name="eventDate" />
+                    <label>Event Time</label>
+                    <input type="text" class="form-control" name="eventTime" />
+                    <label>Event Address</label>
+                    <input type="text" class="form-control" name="eventAddress" />
+                    <label>Event Contact Email</label>
+                    <input type="text" class="form-control" name="eventEmail" />
+                    <label>Event Contact Phone</label>
+                    <input type="text" class="form-control" name="eventPhone" />
+                    <label>Event Coordinator</label>
+                    <input type="text" class="form-control" name="eventCoordinator" />
 
 
                 </div>
+
+
             </div>
-            <div class="col-md-4 hide" data-toggle="editFunction">
-                <div class="card mt-4">
-                    <select class="form-control " name="accountsTarget" onChange="selectAccount()"></select>
-                    <div class="card-body" id="accountDataTarget"></div>
-                </div>
+            <div class="col-md-6">
+                <label>Event Details</label>
+                <textarea type="text" class="form-control" name="eventDetails" rows="17"></textarea>
             </div>
+
 
         </div>
-
     </div>
+
     <div class="hide alert fadeInUp" role="alert" id="globalAlert"></div>
     <footer class="footer mt-auto py-3 animated fadeInUp">
         <div class="container">
@@ -90,15 +82,4 @@
 </body>
 <script src="https://aaronrs2002.github.io/black-jack/js/footer.js"></script>
 
-<script src="js/functionality.js"></script>
-
 </html>
-
-<!--
-
-        "fName": "Greg",
-        "lName": "Johnson",
-        "phone": "555-909-6464",
-        "email": "gregJohnson@email.com",
-        "guestImg": "img/guests/GregJohnson.jpg",
--->
