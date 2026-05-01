@@ -178,3 +178,111 @@ function addEdit(module, addEdit) {
 
 
 }
+
+
+/*
+
+                    <label>Account</label>
+                    <input type="text" class="form-control" name="accountName" />
+                    <label>Event Title</label>
+                    <input type="text" class="form-control" name="eventTitle" />
+                    <label>Event Date</label>
+                    <input type="text" class="form-control" name="eventDate" />
+                    <label>Event Time</label>
+                    <input type="text" class="form-control" name="eventTime" />
+                    <label>Event Address</label>
+                    <input type="text" class="form-control" name="eventAddress" />
+                    <label>Event Contact Email</label>
+                    <input type="text" class="form-control" name="eventEmail" />
+                    <label>Event Contact Phone</label>
+                    <input type="text" class="form-control" name="eventPhone" />
+                    <label>Event Coordinator</label>
+                    <input type="text" class="form-control" name="eventCoordinator" />
+                    <textarea name='eventDetails'/>
+
+*/
+
+let eventObj = [];
+if (localStorage.getItem('eventObj')) {
+    eventObj = localStorage.getItem('eventObj');
+    eventObj = JSON.parse(eventObj)
+}
+
+let eventObjHTML = "<option value='default'>Select Event</option>";
+
+for (let i = 0; i < eventObj.length; i++) {
+    eventObjHTML = eventObjHTML + "<option value='" + i + "'>" + eventObj[i].eventTitle + "</option>";
+}
+
+document.querySelector("select[name='eventList']").innerHTML = eventObjHTML;
+
+
+function updateEvent(addEdit) {
+
+
+
+    switch (addEdit) {
+        case "add":
+
+
+
+
+            eventObj = [...eventObj, {
+
+                accountName: document.querySelector("[name='accountName']").value,
+                eventTitle: document.querySelector("[name='eventTitle']").value,
+                eventDate: document.querySelector("[name='eventDate']").value,
+                eventTime: document.querySelector("[name='eventTime']").value,
+                eventAddress: document.querySelector("[name='eventAddress']").value,
+                eventEmail: document.querySelector("[name='eventEmail']").value,
+                eventPhone: document.querySelector("[name='eventPhone']").value,
+                eventCoordinator: document.querySelector("[name='eventCoordinator']").value,
+                eventDetails: document.querySelector("textarea[name='eventDetails']").value,
+
+
+            }];
+
+            localStorage.setItem("eventObj", JSON.stringify(eventObj));
+
+
+
+            break;
+        case "edit":
+
+
+            eventObj[whichEvent].accountName = document.querySelector("[name='accountName']").value;
+            eventObj[whichEvent].eventTitle = document.querySelector("[name='eventTitle']").value;
+            eventObj[whichEvent].eventDate = document.querySelector("[name='eventDate']").value;
+            eventObj[whichEvent].eventTime = document.querySelector("[name='eventTime']").value;
+            eventObj[whichEvent].eventAddress = document.querySelector("[name='eventAddress']").value;
+            eventObj[whichEvent].eventEmail = document.querySelector("[name='eventEmail']").value;
+            eventObj[whichEvent].eventPhone = document.querySelector("[name='eventPhone']").value;
+            eventObj[whichEvent].eventCoordinator = document.querySelector("[name='eventCoordinator']").value;
+            eventObj[whichEvent].eventDetails = document.querySelector("textarea[name='eventDetails']").value;
+
+
+
+            break;
+
+    }
+
+
+
+}
+
+function selectEvent() {
+    let whichEvent = document.querySelector("select[name='eventList']").value;
+
+
+    document.querySelector("[name='accountName']").value = eventObj[whichEvent].accountName;
+    document.querySelector("[name='eventTitle']").value = eventObj[whichEvent].eventTitle;
+    document.querySelector("[name='eventDate']").value = eventObj[whichEvent].eventDate;
+    document.querySelector("[name='eventTime']").value = eventObj[whichEvent].eventTime;
+    document.querySelector("[name='eventAddress']").value = eventObj[whichEvent].eventAddress;
+    document.querySelector("[name='eventEmail']").value = eventObj[whichEvent].eventEmail;
+    document.querySelector("[name='eventPhone']").value = eventObj[whichEvent].eventPhone;
+    document.querySelector("[name='eventCoordinator']").value = eventObj[whichEvent].eventCoordinator;
+    document.querySelector("textarea[name='eventDetails']").value = eventObj[whichEvent].eventDetails;
+
+
+}

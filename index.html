@@ -27,6 +27,11 @@
                         onClick="addEdit('event','add'); clearForms();">Add</button>
                     <button type="button" class="btn btn-primary" onClick="addEdit('event','edit')">Edit</button>
                 </div>
+
+
+                <select class="form-control hide" name="eventList" onChange="selectEvent()" data-addedit="edit"
+                    data-module="event"></select>
+
             </div>
 
             <div class="col-md-6">
@@ -61,11 +66,11 @@
             <div class="col-md-12">
 
                 <button class="btn btn-block btn-success py-2 mt-2" data-addedit="add" data-module="event"
-                    onClick="addEvent()">Add
+                    onClick="updateEvent('add')">Add
                     Event</button>
 
                 <button class="btn btn-block btn-success py-2 mt-2 hide" data-addedit="edit" data-module="event"
-                    onClick="editEvent()">Edit
+                    onClick="updateEvent('edit')">Edit
                     Event</button>
             </div>
         </div>
