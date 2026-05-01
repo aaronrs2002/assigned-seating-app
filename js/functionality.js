@@ -125,3 +125,56 @@ function clearForms() {
         e.selectedIndex = 0;
     });
 }
+
+
+function addEdit(module, addEdit) {
+    if (module === "event" && addEdit === "add") {
+        [].forEach.call(document.querySelectorAll("[data-module='event'][data-addedit='edit']"), (e) => {
+            e.classList.add("hide");
+        });
+
+        [].forEach.call(document.querySelectorAll("[data-module='event'][data-addedit='add']"), (e) => {
+            e.classList.remove("hide");
+        });
+        globalAlert("alert-success", "Your in Add Mode for events.");
+    }
+
+    if (module === "event" && addEdit === "edit") {
+        [].forEach.call(document.querySelectorAll("[data-module='event'][data-addedit='add']"), (e) => {
+            e.classList.add("hide");
+        });
+
+        [].forEach.call(document.querySelectorAll("[data-module='event'][data-addedit='edit']"), (e) => {
+            e.classList.remove("hide");
+        });
+        globalAlert("alert-success", "Your in Edit Mode for events.");
+    }
+    /*start profile*/
+    console.log("module: " + module + " - addEdit: " + addEdit);
+
+    if (module === "profile" && addEdit === "add") {
+        [].forEach.call(document.querySelectorAll("[data-module='profile'][data-addedit='edit']"), (e) => {
+            e.classList.add("hide");
+        });
+
+        [].forEach.call(document.querySelectorAll("[data-module='profile'][data-addedit='add']"), (e) => {
+            e.classList.remove("hide");
+        });
+
+        globalAlert("alert-success", "Your in Add Mode For profiles.");
+    }
+
+    if (module === "profile" && addEdit === "edit") {
+        [].forEach.call(document.querySelectorAll("[data-module='profile'][data-addedit='add']"), (e) => {
+            e.classList.add("hide");
+        });
+
+        [].forEach.call(document.querySelectorAll("[data-module='profile'][data-addedit='edit']"), (e) => {
+            e.classList.remove("hide");
+        });
+        globalAlert("alert-success", "Your in Edit Mode For profiles.");
+    }
+
+
+
+}
