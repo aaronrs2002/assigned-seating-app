@@ -1,4 +1,14 @@
 let guestData = [];
+/*
+
+function clearForms() {
+    [].forEach.call(document.querySelectorAll("input[type='text']"), (e) => {
+        e.value = "";
+    });
+    [].forEach.call(document.querySelectorAll("select"), (e) => {
+        e.selectedIndex = 0;
+    });
+}
 
 async function fetchGuest() {
 
@@ -19,6 +29,8 @@ const buildGuests = async () => {
 
     guestData = result;
 
+    localStorage.setItem("guestData", JSON.stringify(guestData));
+
     let guestSelectList = "<option value='default'>Select Profile</option>";
 
     for (let i = 0; i < result.length; i++) {
@@ -27,7 +39,27 @@ const buildGuests = async () => {
 
 
     document.querySelector("select[name='guestList']").innerHTML = guestSelectList;
-}; buildGuests();
+};*/
+
+if (!localStorage.getItem("guestData")) {
+    globalAlert("alert-danger", "No Guest data.");
+
+}
+else {
+    guestData = localStorage.getItem("guestData")
+
+    guestData = JSON.parse(guestData);
+
+    let guestSelectList = "<option value='default'>Select Profile</option>";
+
+    for (let i = 0; i < guestData.length; i++) {
+        guestSelectList = guestSelectList + "<option value='" + i + "'>" + guestData[i].fName + " " + guestData[i].lName + "</option>"
+    }
+
+
+    document.querySelector("select[name='guestList']").innerHTML = guestSelectList;
+}
+
 
 function selectProfile() {
 
@@ -69,7 +101,6 @@ function selectProfile() {
 
 
 
-
     /*
     "events": [
         {
@@ -86,6 +117,27 @@ function selectProfile() {
     */
 
 }
+
+
+function buildProfile() {
+    guestData = localStorage.getItem("guestData")
+
+    guestData = JSON.parse(guestData);
+
+    guestData = [...guestData, {
+        fName: document.querySelector("[name='fName']").value,
+        lName: document.querySelector("[name='lName']").value,
+        phone: document.querySelector("[name='phone']").value,
+        email: document.querySelector("[name='email']").value,
+        guestImg: document.querySelector("[name='guestImg']").value
+
+    }];
+
+    localStorage.setItem("guestData", JSON.stringify(guestData));
+    clearForms();
+
+}
+
 
 function selectAccount() {
 
@@ -117,14 +169,6 @@ function selectAccount() {
 
 }
 
-function clearForms() {
-    [].forEach.call(document.querySelectorAll("input[type='text']"), (e) => {
-        e.value = "";
-    });
-    [].forEach.call(document.querySelectorAll("select"), (e) => {
-        e.selectedIndex = 0;
-    });
-}
 
 
 function addEdit(module, addEdit) {
@@ -181,7 +225,7 @@ function addEdit(module, addEdit) {
 
 
 /*
-
+START EVENT MODULE
                     <label>Account</label>
                     <input type="text" class="form-control" name="accountName" />
                     <label>Event Title</label>
