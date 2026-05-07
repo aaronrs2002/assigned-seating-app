@@ -132,7 +132,8 @@ function buildProfile() {
         lName: document.querySelector("[name='lName']").value,
         phone: document.querySelector("[name='phone']").value,
         email: document.querySelector("[name='email']").value,
-        guestImg: document.querySelector("[name='guestImg']").value
+        guestImg: document.querySelector("[name='guestImg']").value,
+        "events": []
 
     }];
 
@@ -152,6 +153,7 @@ function editProfile() {
     guestData[whichProfile].phone = document.querySelector("[name='phone']").value;
     guestData[whichProfile].email = document.querySelector("[name='email']").value;
     guestData[whichProfile].guestImg = document.querySelector("[name='guestImg']").value;
+    guestData[whichProfile].events = guestData[whichProfile].events;
 
     localStorage.setItem("guestData", JSON.stringify(guestData));
     clearForms();
