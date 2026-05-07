@@ -1,5 +1,5 @@
 let guestData = [];
-/*
+
 
 function clearForms() {
     [].forEach.call(document.querySelectorAll("input[type='text']"), (e) => {
@@ -9,7 +9,7 @@ function clearForms() {
         e.selectedIndex = 0;
     });
 }
-
+/*
 async function fetchGuest() {
 
 
@@ -40,25 +40,26 @@ const buildGuests = async () => {
 
     document.querySelector("select[name='guestList']").innerHTML = guestSelectList;
 };*/
+function buildSelectMenu() {
+    if (!localStorage.getItem("guestData")) {
+        globalAlert("alert-danger", "No Guest data.");
 
-if (!localStorage.getItem("guestData")) {
-    globalAlert("alert-danger", "No Guest data.");
-
-}
-else {
-    guestData = localStorage.getItem("guestData")
-
-    guestData = JSON.parse(guestData);
-
-    let guestSelectList = "<option value='default'>Select Profile</option>";
-
-    for (let i = 0; i < guestData.length; i++) {
-        guestSelectList = guestSelectList + "<option value='" + i + "'>" + guestData[i].fName + " " + guestData[i].lName + "</option>"
     }
+    else {
+        guestData = localStorage.getItem("guestData")
+        guestData = JSON.parse(guestData);
+
+        let guestSelectList = "<option value='default'>Select Profile</option>";
+
+        for (let i = 0; i < guestData.length; i++) {
+            guestSelectList = guestSelectList + "<option value='" + i + "'>" + guestData[i].fName + " " + guestData[i].lName + "</option>"
+        }
 
 
-    document.querySelector("select[name='guestList']").innerHTML = guestSelectList;
+        document.querySelector("select[name='guestList']").innerHTML = guestSelectList;
+    }
 }
+buildSelectMenu();
 
 
 function selectProfile() {
@@ -77,26 +78,28 @@ function selectProfile() {
     document.getElementById("nameTarget").innerHTML = guestData[whichProfile].fName + " " + guestData[whichProfile].lName;
 
     let accountsObj = [];
+    if (guestData[0].events) {
 
+        for (let i = 0; i < guestData[whichProfile].events.length; i++) {
 
-    for (let i = 0; i < guestData[whichProfile].events.length; i++) {
-
-        if (accountsObj.indexOf(guestData[whichProfile].events[i].account) === -1) {
-            accountsObj.push(guestData[whichProfile].events[i].account);
+            if (accountsObj.indexOf(guestData[whichProfile].events[i].account) === -1) {
+                accountsObj.push(guestData[whichProfile].events[i].account);
+            }
         }
+
+
+        console.log("JSON.stringify(accountsObj): " + JSON.stringify(accountsObj));
+
+
+        let accountsTargetHTML = "<option value='default'>Select Account</option>";
+
+        for (let i = 0; i < accountsObj.length; i++) {
+            accountsTargetHTML = accountsTargetHTML + "<option value='" + accountsObj[i] + "'>" + accountsObj[i] + "</option>"
+        }
+
+        document.querySelector("select[name='accountsTarget']").innerHTML = accountsTargetHTML;
+
     }
-
-
-    console.log("JSON.stringify(accountsObj): " + JSON.stringify(accountsObj));
-
-
-    let accountsTargetHTML = "<option value='default'>Select Account</option>";
-
-    for (let i = 0; i < accountsObj.length; i++) {
-        accountsTargetHTML = accountsTargetHTML + "<option value='" + accountsObj[i] + "'>" + accountsObj[i] + "</option>"
-    }
-
-    document.querySelector("select[name='accountsTarget']").innerHTML = accountsTargetHTML;
 
 
 
@@ -135,8 +138,27 @@ function buildProfile() {
 
     localStorage.setItem("guestData", JSON.stringify(guestData));
     clearForms();
+    buildSelectMenu();
 
 }
+
+
+
+
+function editProfile() {
+    let whichProfile = document.querySelector("select[name='guestList']").value;
+    guestData[whichProfile].fName = document.querySelector("[name='fName']").value;
+    guestData[whichProfile].lName = document.querySelector("[name='lName']").value;
+    guestData[whichProfile].phone = document.querySelector("[name='phone']").value;
+    guestData[whichProfile].email = document.querySelector("[name='email']").value;
+    guestData[whichProfile].guestImg = document.querySelector("[name='guestImg']").value;
+
+    localStorage.setItem("guestData", JSON.stringify(guestData));
+    clearForms();
+    buildSelectMenu();
+
+}
+
 
 
 function selectAccount() {
