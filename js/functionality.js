@@ -340,7 +340,7 @@ console.log("JSON.stringify(eventObj): " + JSON.stringify(eventObj))
 buildEventMenu(eventObj);
 
 function updateEvent(addEdit) {
-
+    let whichEvent = document.querySelector("[name='eventList']").value;
 
 
     switch (addEdit) {
@@ -388,12 +388,18 @@ function updateEvent(addEdit) {
 
     }
 
+    localStorage.setItem("eventObj", JSON.stringify(eventObj));
+
     globalAlert("alert-success", addEdit + " was successful!");
     clearForms();
 
 }
 
 function selectEvent() {
+
+    addEdit("event", "edit");
+
+
     let whichEvent = document.querySelector("select[name='eventList']").value;
 
 
