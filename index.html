@@ -45,7 +45,16 @@
     </nav>
     <main>
         <div class="container">
-            <div class="row">
+
+            <div class="btn-group block mt-2" role="group">
+                <button type="button" class="btn btn-info" onclick="javascript:toggle('events')"
+                    data-addeditbt="add">Event Module</button>
+                <button type="button" class="btn btn-info " data-addeditbt="edit"
+                    onclick="javascript:toggle('profile')">Personal Profile</button>
+
+
+            </div>
+            <div class="row" data-toggle="events">
 
                 <div class="col-md-12">
                     <h1>Event Module</h1>
@@ -107,7 +116,7 @@
 
 
 
-            <div class="row">
+            <div class="row hide" data-toggle="profile">
                 <hr />
                 <div class="col-md-12">
                     <h1>Personal Profile</h1>
