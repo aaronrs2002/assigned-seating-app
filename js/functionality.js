@@ -5,10 +5,27 @@ function clearForms() {
     [].forEach.call(document.querySelectorAll("input[type='text']"), (e) => {
         e.value = "";
     });
+    [].forEach.call(document.querySelectorAll("textarea"), (e) => {
+        e.value = "";
+    });
     [].forEach.call(document.querySelectorAll("select"), (e) => {
         e.selectedIndex = 0;
     });
 }
+
+function buildEventMenu(eventObj) {
+    let eventObjHTML = "<option value='default'>Select Event</option>";
+
+    for (let i = 0; i < eventObj.length; i++) {
+        eventObjHTML = eventObjHTML + "<option value='" + i + "'>" + eventObj[i].task + "</option>";
+    }
+
+    document.querySelector("select[name='eventList']").innerHTML = eventObjHTML;
+}
+
+
+
+
 /*
 async function fetchGuest() {
 
@@ -273,16 +290,27 @@ START EVENT MODULE
 let eventObj = [];
 let compareList = []
 if (localStorage.getItem('eventObj')) {
-    eventObj = localStorage.getItem('eventObj');
-    eventObj = JSON.parse(eventObj)
-    compareList.push(eventObj[i].task);
+
+    let tempEventObj = localStorage.getItem('eventObj');
+
+    console.log("tempEventObj: " + tempEventObj);
+    console.log("what is tempEventObj: " + (typeof tempEventObj));
+
+    let tempParse = JSON.parse(tempEventObj);
+    for (let i = 0; i < tempEventObj.length; i++) {
+        compareList.push(tempEventObj[i].task);
+    }
+    eventObj = tempParse;
 }
+
+
 
 if (localStorage.getItem("taskList")) {
 
     let tempEventObj = [];
     let tempTasks = localStorage.getItem("taskList");
     tempTasks = JSON.parse(tempTasks);
+    console.log("tempTasks: " + JSON.stringify(tempTasks));
     for (let i = 0; i < tempTasks.length; i++) {
         if (compareList.indexOf(tempTasks[i].task) === -1) {
             tempEventObj.push({
@@ -305,16 +333,11 @@ if (localStorage.getItem("taskList")) {
 
     eventObj = [...eventObj, ...tempEventObj];
 
+
 }
 
-let eventObjHTML = "<option value='default'>Select Event</option>";
-
-for (let i = 0; i < eventObj.length; i++) {
-    eventObjHTML = eventObjHTML + "<option value='" + i + "'>" + eventObj[i].task + "</option>";
-}
-
-document.querySelector("select[name='eventList']").innerHTML = eventObjHTML;
-
+console.log("JSON.stringify(eventObj): " + JSON.stringify(eventObj))
+buildEventMenu(eventObj);
 
 function updateEvent(addEdit) {
 
@@ -365,7 +388,8 @@ function updateEvent(addEdit) {
 
     }
 
-
+    globalAlert("alert-success", addEdit + " was successful!");
+    clearForms();
 
 }
 
