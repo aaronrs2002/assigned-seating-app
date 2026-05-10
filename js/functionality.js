@@ -271,15 +271,46 @@ START EVENT MODULE
 */
 
 let eventObj = [];
+let compareList = []
 if (localStorage.getItem('eventObj')) {
     eventObj = localStorage.getItem('eventObj');
     eventObj = JSON.parse(eventObj)
+    compareList.push(eventObj[i].task);
+}
+
+if (localStorage.getItem("taskList")) {
+
+    let tempEventObj = [];
+    let tempTasks = localStorage.getItem("taskList");
+    tempTasks = JSON.parse(tempTasks);
+    for (let i = 0; i < tempTasks.length; i++) {
+        if (compareList.indexOf(tempTasks[i].task) === -1) {
+            tempEventObj.push({
+                accountName: "",
+                task: tempTasks[i].task,
+                startDate: tempTasks[i].startDate,
+                eventTime: "",
+                eventAddress: "",
+                eventEmail: "",
+                eventPhone: "",
+                eventCoordinator: "",
+                taskDetails: tempTasks[i].taskDetails,
+
+            });
+        }
+
+
+
+    }
+
+    eventObj = [...eventObj, ...tempEventObj];
+
 }
 
 let eventObjHTML = "<option value='default'>Select Event</option>";
 
 for (let i = 0; i < eventObj.length; i++) {
-    eventObjHTML = eventObjHTML + "<option value='" + i + "'>" + eventObj[i].eventTitle + "</option>";
+    eventObjHTML = eventObjHTML + "<option value='" + i + "'>" + eventObj[i].task + "</option>";
 }
 
 document.querySelector("select[name='eventList']").innerHTML = eventObjHTML;
@@ -298,14 +329,14 @@ function updateEvent(addEdit) {
             eventObj = [...eventObj, {
 
                 accountName: document.querySelector("[name='accountName']").value,
-                eventTitle: document.querySelector("[name='eventTitle']").value,
-                eventDate: document.querySelector("[name='eventDate']").value,
+                task: document.querySelector("[name='eventTitle']").value,
+                startDate: document.querySelector("[name='eventDate']").value,
                 eventTime: document.querySelector("[name='eventTime']").value,
                 eventAddress: document.querySelector("[name='eventAddress']").value,
                 eventEmail: document.querySelector("[name='eventEmail']").value,
                 eventPhone: document.querySelector("[name='eventPhone']").value,
                 eventCoordinator: document.querySelector("[name='eventCoordinator']").value,
-                eventDetails: document.querySelector("textarea[name='eventDetails']").value,
+                taskDetails: document.querySelector("textarea[name='eventDetails']").value,
 
 
             }];
@@ -319,14 +350,14 @@ function updateEvent(addEdit) {
 
 
             eventObj[whichEvent].accountName = document.querySelector("[name='accountName']").value;
-            eventObj[whichEvent].eventTitle = document.querySelector("[name='eventTitle']").value;
-            eventObj[whichEvent].eventDate = document.querySelector("[name='eventDate']").value;
+            eventObj[whichEvent].task = document.querySelector("[name='eventTitle']").value;
+            eventObj[whichEvent].startDate = document.querySelector("[name='eventDate']").value;
             eventObj[whichEvent].eventTime = document.querySelector("[name='eventTime']").value;
             eventObj[whichEvent].eventAddress = document.querySelector("[name='eventAddress']").value;
             eventObj[whichEvent].eventEmail = document.querySelector("[name='eventEmail']").value;
             eventObj[whichEvent].eventPhone = document.querySelector("[name='eventPhone']").value;
             eventObj[whichEvent].eventCoordinator = document.querySelector("[name='eventCoordinator']").value;
-            eventObj[whichEvent].eventDetails = document.querySelector("textarea[name='eventDetails']").value;
+            eventObj[whichEvent].taskDetails = document.querySelector("textarea[name='eventDetails']").value;
 
 
 
@@ -343,14 +374,14 @@ function selectEvent() {
 
 
     document.querySelector("[name='accountName']").value = eventObj[whichEvent].accountName;
-    document.querySelector("[name='eventTitle']").value = eventObj[whichEvent].eventTitle;
-    document.querySelector("[name='eventDate']").value = eventObj[whichEvent].eventDate;
+    document.querySelector("[name='eventTitle']").value = eventObj[whichEvent].task;
+    document.querySelector("[name='eventDate']").value = eventObj[whichEvent].startDate;
     document.querySelector("[name='eventTime']").value = eventObj[whichEvent].eventTime;
     document.querySelector("[name='eventAddress']").value = eventObj[whichEvent].eventAddress;
     document.querySelector("[name='eventEmail']").value = eventObj[whichEvent].eventEmail;
     document.querySelector("[name='eventPhone']").value = eventObj[whichEvent].eventPhone;
     document.querySelector("[name='eventCoordinator']").value = eventObj[whichEvent].eventCoordinator;
-    document.querySelector("textarea[name='eventDetails']").value = eventObj[whichEvent].eventDetails;
+    document.querySelector("textarea[name='eventDetails']").value = eventObj[whichEvent].taskDetails;
 
 
 }

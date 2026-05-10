@@ -13,134 +13,163 @@
 
     <link rel="stylesheet" href="https://aaronrs2002.github.io/black-jack/css/animate.min.css" />
     <link href="https://aaronrs2002.github.io/black-jack/css/shared.css" rel="stylesheet">
+
+
+    <link href="https://aaronrs2002.github.io/black-jack/css/shared.css" rel="stylesheet" />
+    <link href="https://aaronrs2002.github.io/task-master/css/style.css" rel="stylesheet" />
+
     <link href="css/style.css" rel="stylesheet" />
+
+
 </head>
 
-<body>
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-12">
-                <h1>Event Module</h1>
-                <div class="btn-group form-control p-0" role="group">
-                    <button type="button active" class="btn btn-primary"
-                        onClick="addEdit('event','add'); clearForms();">Add</button>
-                    <button type="button" class="btn btn-primary" onClick="addEdit('event','edit')">Edit</button>
-                </div>
+<body class="wLogo">
 
 
-                <select class="form-control hide" name="eventList" onChange="selectEvent()" data-addedit="edit"
-                    data-module="event"></select>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="http://web-presence.biz/?src=itWebApp" target="_blank"><img
+                    src="https://web-presence.biz/img/MA_Logo.png" class="img-fluid" id="top" /></a>
+            <button class="navbar-toggler collapsed" onClick="toggleMobileNav('mobileNav')">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-
-                    <label>Account</label>
-                    <input type="text" class="form-control" name="accountName" />
-                    <label>Event Title</label>
-                    <input type="text" class="form-control" name="eventTitle" />
-                    <label>Event Date</label>
-                    <input type="text" class="form-control" name="eventDate" />
-                    <label>Event Time</label>
-                    <input type="text" class="form-control" name="eventTime" />
-                    <label>Event Address</label>
-                    <input type="text" class="form-control" name="eventAddress" />
-                    <label>Event Contact Email</label>
-                    <input type="text" class="form-control" name="eventEmail" />
-                    <label>Event Contact Phone</label>
-                    <input type="text" class="form-control" name="eventPhone" />
-                    <label>Event Coordinator</label>
-                    <input type="text" class="form-control" name="eventCoordinator" />
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav me-auto mb-2 ml-5 mb-sm-0" id="navLinkTarget">
 
 
-                </div>
+                </ul>
 
-
-            </div>
-            <div class="col-md-6">
-                <label>Event Details</label>
-                <textarea type="text" class="form-control" name="eventDetails" rows="17"></textarea>
-            </div>
-            <div class="col-md-12">
-
-                <button class="btn btn-block btn-success py-2 mt-2" data-addedit="add" data-module="event"
-                    onClick="updateEvent('add')">Add
-                    Event</button>
-
-                <button class="btn btn-block btn-success py-2 mt-2 hide" data-addedit="edit" data-module="event"
-                    onClick="updateEvent('edit')">Edit
-                    Event</button>
             </div>
         </div>
+    </nav>
+    <main>
+        <div class="container">
+            <div class="row">
 
+                <div class="col-md-12">
+                    <h1>Event Module</h1>
 
-
-
-
-        <div class="row">
-            <hr />
-            <div class="col-md-12">
-                <h1>Personal Profile</h1>
-                <div class="btn-group form-control p-0" role="group">
-                    <button type="button active" class="btn btn-primary"
-                        onClick="addEdit('profile','add'); clearForms();">Add</button>
-                    <button type="button" class="btn btn-primary" onClick="addEdit('profile','edit')">Edit</button>
-                </div>
-                <select class="form-control hide" name="guestList" data-addedit="edit" data-module="profile"
-                    onChange="selectProfile()">
-
-                </select>
-
-            </div>
-            <div class="col-md-4">
-
-                <div class="form-group">
-                    <label>First Name</label>
-                    <input type="text" class="form-control" name="fName" />
-                    <label>Last Name</label>
-                    <input type="text" class="form-control" name="lName" />
-                    <label>Phone</label>
-                    <input type="text" class="form-control" name="phone" />
-                    <label>Email</label>
-                    <input type="text" class="form-control" name="email" />
-                    <label>Guest Image</label>
-                    <input type="text" class="form-control" name="guestImg" />
-
-                </div>
-            </div>
-            <div class="col-md-4 hide" data-addedit="edit" data-module="profile">
-                <div class="card mt-4">
-                    <div class="card-body">
-                        <div id="guestImgTarget" class="d-flex justify-content-center"></div>
-                        <h5 class="card-title d-flex justify-content-center pt-2" id="nameTarget"></h5>
-
+                    <select class="form-control" name="eventList" onChange="selectEvent()" data-addedit="edit"
+                        data-module="event"></select>
+                    <div class="btn-group form-control p-0" role="group">
+                        <button type="button active" class="btn btn-primary"
+                            onClick="addEdit('event','add'); clearForms();">Add</button>
+                        <button type="button" class="btn btn-primary" onClick="addEdit('event','edit')">Edit</button>
                     </div>
 
 
 
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+
+                        <label>Account</label>
+                        <input type="text" class="form-control" name="accountName" />
+                        <label>Event Title</label>
+                        <input type="text" class="form-control" name="eventTitle" />
+                        <label>Event Date</label>
+                        <input type="text" class="form-control" name="eventDate" />
+                        <label>Event Time</label>
+                        <input type="text" class="form-control" name="eventTime" />
+                        <label>Event Address</label>
+                        <input type="text" class="form-control" name="eventAddress" />
+                        <label>Event Contact Email</label>
+                        <input type="text" class="form-control" name="eventEmail" />
+                        <label>Event Contact Phone</label>
+                        <input type="text" class="form-control" name="eventPhone" />
+                        <label>Event Coordinator</label>
+                        <input type="text" class="form-control" name="eventCoordinator" />
+
+
+                    </div>
+
 
                 </div>
-            </div>
-            <div class="col-md-4 hide" data-addedit="edit" data-module="profile">
-                <div class="card mt-4">
-                    <select class="form-control " name="accountsTarget" onChange="selectAccount()"></select>
-                    <div class="card-body" id="accountDataTarget"></div>
+                <div class="col-md-6">
+                    <label>Event Details</label>
+                    <textarea type="text" class="form-control" name="eventDetails" rows="17"></textarea>
+                </div>
+                <div class="col-md-12">
+
+                    <button class="btn btn-block btn-success py-2 mt-2" data-addedit="add" data-module="event"
+                        onClick="updateEvent('add')">Add
+                        Event</button>
+
+                    <button class="btn btn-block btn-success py-2 mt-2 hide" data-addedit="edit" data-module="event"
+                        onClick="updateEvent('edit')">Edit
+                        Event</button>
                 </div>
             </div>
-            <div class="col-md-12">
-                <button class="btn btn-block btn-success py-2 mt-2" data-addedit="add" data-module="profile"
-                    onClick="buildProfile()">Add
-                    Profile</button>
 
-                <button class="btn btn-block btn-success py-2 mt-2 hide" data-addedit="edit" data-module="profile"
-                    onClick="editProfile()">Event
-                    Profile</button>
+
+
+
+
+            <div class="row">
+                <hr />
+                <div class="col-md-12">
+                    <h1>Personal Profile</h1>
+                    <div class="btn-group form-control p-0" role="group">
+                        <button type="button active" class="btn btn-primary"
+                            onClick="addEdit('profile','add'); clearForms();">Add</button>
+                        <button type="button" class="btn btn-primary" onClick="addEdit('profile','edit')">Edit</button>
+                    </div>
+                    <select class="form-control hide" name="guestList" data-addedit="edit" data-module="profile"
+                        onChange="selectProfile()">
+
+                    </select>
+
+                </div>
+                <div class="col-md-4">
+
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" class="form-control" name="fName" />
+                        <label>Last Name</label>
+                        <input type="text" class="form-control" name="lName" />
+                        <label>Phone</label>
+                        <input type="text" class="form-control" name="phone" />
+                        <label>Email</label>
+                        <input type="text" class="form-control" name="email" />
+                        <label>Guest Image</label>
+                        <input type="text" class="form-control" name="guestImg" />
+
+                    </div>
+                </div>
+                <div class="col-md-4 hide" data-addedit="edit" data-module="profile">
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <div id="guestImgTarget" class="d-flex justify-content-center"></div>
+                            <h5 class="card-title d-flex justify-content-center pt-2" id="nameTarget"></h5>
+
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+                <div class="col-md-4 hide" data-addedit="edit" data-module="profile">
+                    <div class="card mt-4">
+                        <select class="form-control " name="accountsTarget" onChange="selectAccount()"></select>
+                        <div class="card-body" id="accountDataTarget"></div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button class="btn btn-block btn-success py-2 mt-2" data-addedit="add" data-module="profile"
+                        onClick="buildProfile()">Add
+                        Profile</button>
+
+                    <button class="btn btn-block btn-success py-2 mt-2 hide" data-addedit="edit" data-module="profile"
+                        onClick="editProfile()">Event
+                        Profile</button>
+                </div>
             </div>
+
         </div>
-
-    </div>
+    </main>
     <div class="hide alert fadeInUp" role="alert" id="globalAlert"></div>
     <footer class="footer mt-auto py-3 animated fadeInUp">
         <div class="container">
@@ -159,7 +188,8 @@
 
 </body>
 <script src="https://aaronrs2002.github.io/black-jack/js/footer.js"></script>
-
+<script src="https://aaronrs2002.github.io/task-master/js/validate.js"></script>
+<script src="https://aaronrs2002.github.io/task-master/js/sharedFunctionality.js"></script>
 <script src="js/functionality.js"></script>
 
 </html>
