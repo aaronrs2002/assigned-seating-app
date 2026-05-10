@@ -118,7 +118,7 @@ function selectProfile() {
 
     }
 
-
+    addEdit('profile', 'edit');
 
 
     /*
@@ -140,9 +140,13 @@ function selectProfile() {
 
 
 function buildProfile() {
-    guestData = localStorage.getItem("guestData")
 
-    guestData = JSON.parse(guestData);
+    if (localStorage.getItem("guestData")) {
+        guestData = localStorage.getItem("guestData")
+
+        guestData = JSON.parse(guestData);
+    }
+
 
     guestData = [...guestData, {
         fName: document.querySelector("[name='fName']").value,
