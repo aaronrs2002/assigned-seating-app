@@ -54,7 +54,7 @@
 
 
             </div>
-            <div class="row" data-toggle="events">
+            <div class="row hide" data-toggle="events">
 
                 <div class="col-md-12">
                     <h1>Event Module</h1>
@@ -116,7 +116,7 @@
 
 
 
-            <div class="row hide" data-toggle="profile">
+            <div class="row" data-toggle="profile">
                 <hr />
                 <div class="col-md-12">
                     <h1>Personal Profile</h1>
@@ -147,7 +147,7 @@
 
                     </div>
                 </div>
-                <div class="col-md-4 hide" data-addedit="edit" data-module="profile">
+                <div class="col-md-4" data-addedit="edit" data-module="profile">
                     <div class="card mt-4">
                         <div class="card-body">
                             <div id="guestImgTarget" class="d-flex justify-content-center"></div>
@@ -160,15 +160,15 @@
 
                     </div>
                 </div>
-                <div class="col-md-4 hide" data-addedit="edit" data-module="profile">
+                <div class="col-md-4" data-addedit="edit" data-module="profile">
                     <div class="card mt-4">
                         <select class="form-control " name="accountsTarget" onChange="selectAccount()"></select>
                         <div class="card-body" id="accountDataTarget"></div>
                     </div>
                     <div class="card mt-4">
-                        <div class="card-body"></div>
-                        <ul class="list-unstyled" id="taskListTarget"></ul>
-
+                        <div class="card-body">
+                            <ul class="list-group list-unstyled" id="taskListTarget"></ul>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -177,7 +177,7 @@
                         Profile</button>
 
                     <button class="btn btn-block btn-success py-2 mt-2 hide" data-addedit="edit" data-module="profile"
-                        onClick="editProfile()">Event
+                        onClick="editProfile()">Edit
                         Profile</button>
                 </div>
             </div>

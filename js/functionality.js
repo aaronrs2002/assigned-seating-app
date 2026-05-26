@@ -1,4 +1,6 @@
 let guestData = [];
+let selectedTasks = [];
+let activeUser = "";
 
 
 function clearForms() {
@@ -80,6 +82,7 @@ buildSelectMenu();
 
 
 function selectProfile() {
+    selectedTasks = JSON.parse(localStorage.getItem("selectedTasks"));
 
     let whichProfile = document.querySelector("select[name='guestList']").value;
     if (whichProfile === "default") {
@@ -93,6 +96,7 @@ function selectProfile() {
     document.querySelector("[name='guestImg']").value = guestData[whichProfile].guestImg;
     document.getElementById("guestImgTarget").innerHTML = "<img class='img-fluid' src='" + guestData[whichProfile].guestImg + "' />";
     document.getElementById("nameTarget").innerHTML = guestData[whichProfile].fName + " " + guestData[whichProfile].lName;
+    activeUser = guestData[whichProfile].email;
 
     let accountsObj = [];
     if (guestData[0].events) {
@@ -136,17 +140,30 @@ function selectProfile() {
         },
     */
 
+
+
+
     if (localStorage.getItem("taskList")) {
         let tempTasks = localStorage.getItem("taskList");
         tempTasks = JSON.parse(tempTasks);
-        console.log("tempTasks NEW: " + JSON.stringify(tempTasks));
+
         let taskListStr = "";
         for (let i = 0; i < tempTasks.length; i++) {
-            taskListStr = taskListStr + `<li><input type="checkbox" name="taskItem" value="${tempTasks[i].task}"/>${tempTasks[i].task}<li>`;
-        }
 
+            taskListStr = taskListStr + `<li class="list-group-item"><input type="checkbox" name="taskItem" onChange="updateProfileTask()" value="${tempTasks[i].task}"/> - ${tempTasks[i].task}<li>`;
+        }
         document.getElementById("taskListTarget").innerHTML = taskListStr;
     }
+
+
+    for (let i = 0; i < selectedTasks.length; i++) {
+
+        if (selectedTasks[i].user === activeUser && document.querySelector("input[type='checkbox'][value='" + selectedTasks[i].task + "']")) {
+            document.querySelector("input[type='checkbox'][value='" + selectedTasks[i].task + "']").checked = true;
+        }
+
+    }
+
 
 }
 
@@ -309,8 +326,7 @@ if (localStorage.getItem('eventObj')) {
 
     let tempEventObj = localStorage.getItem('eventObj');
 
-    console.log("tempEventObj: " + tempEventObj);
-    console.log("what is tempEventObj: " + (typeof tempEventObj));
+
 
     let tempParse = JSON.parse(tempEventObj);
     for (let i = 0; i < tempEventObj.length; i++) {
@@ -352,7 +368,7 @@ if (localStorage.getItem("taskList")) {
 
 }
 
-console.log("JSON.stringify(eventObj): " + JSON.stringify(eventObj))
+
 buildEventMenu(eventObj);
 
 function updateEvent(addEdit) {
@@ -434,3 +450,21 @@ function selectEvent() {
 
 
 
+function updateProfileTask() {
+
+
+    [].forEach.call(document.querySelectorAll("input[name='taskItem']"), (e) => {
+
+        if (e.checked) {
+            console.log("e.checked: " + e.checked + " - e.value " + e.value);
+            selectedTasks.push({ user: activeUser, task: e.value });
+        }
+
+        localStorage.setItem("selectedTasks", JSON.stringify(selectedTasks));
+
+
+
+    });
+
+
+}
