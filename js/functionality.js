@@ -136,6 +136,18 @@ function selectProfile() {
         },
     */
 
+    if (localStorage.getItem("taskList")) {
+        let tempTasks = localStorage.getItem("taskList");
+        tempTasks = JSON.parse(tempTasks);
+        console.log("tempTasks NEW: " + JSON.stringify(tempTasks));
+        let taskListStr = "";
+        for (let i = 0; i < tempTasks.length; i++) {
+            taskListStr = taskListStr + `<li><input type="checkbox" name="taskItem" value="${tempTasks[i].task}"/>${tempTasks[i].task}<li>`;
+        }
+
+        document.getElementById("taskListTarget").innerHTML = taskListStr;
+    }
+
 }
 
 
@@ -314,7 +326,7 @@ if (localStorage.getItem("taskList")) {
     let tempEventObj = [];
     let tempTasks = localStorage.getItem("taskList");
     tempTasks = JSON.parse(tempTasks);
-    console.log("tempTasks: " + JSON.stringify(tempTasks));
+
     for (let i = 0; i < tempTasks.length; i++) {
         if (compareList.indexOf(tempTasks[i].task) === -1) {
             tempEventObj.push({
@@ -419,3 +431,6 @@ function selectEvent() {
 
 
 }
+
+
+
