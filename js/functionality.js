@@ -81,6 +81,7 @@ buildSelectMenu();
 
 
 function selectProfile() {
+    let usedAssigned = [];
     selectedTasks = JSON.parse(localStorage.getItem("selectedTasks"));
 
     let whichProfile = document.querySelector("select[name='guestList']").value;
@@ -123,7 +124,11 @@ function selectProfile() {
 
         if (activeUser === guestData[whichProfile].email) {
             for (let i = 0; i < guestData[whichProfile].events.length; i++) {
-                seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><input type="text" class="form-control" name="${guestData[whichProfile].events[i].task}-seat" placeholder="Assigned Seat for ${guestData[whichProfile].events[i].task}"/></li>`
+                if (usedAssigned.indexOf(guestData[whichProfile].events[i].task) === -1) {
+                    seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><input type="text" class="form-control" name="${guestData[whichProfile].events[i].task}-seat" placeholder="Assigned Seat for ${guestData[whichProfile].events[i].task}"/></li>`
+
+                    usedAssigned.push(guestData[whichProfile].events[i].task);
+                }
             }
         }
 
@@ -470,6 +475,7 @@ function selectEvent() {
 
 
 function updateProfileTask() {
+    document.getElementById("seatAssignment").innerHTML = "";
     let seatAssignmentHTML = "";
 
     let usedAssigned = [];
