@@ -1,5 +1,4 @@
 let guestData = [];
-let selectedTasks = [];
 let activeUser = "";
 
 
@@ -156,10 +155,19 @@ function selectProfile() {
     }
 
 
-    for (let i = 0; i < selectedTasks.length; i++) {
+    for (let i = 0; i < guestData.length; i++) {
 
-        if (selectedTasks[i].user === activeUser && document.querySelector("input[type='checkbox'][value='" + selectedTasks[i].task + "']")) {
-            document.querySelector("input[type='checkbox'][value='" + selectedTasks[i].task + "']").checked = true;
+
+
+        if (guestData[i].email === activeUser) {
+
+            let selectedTasks = guestData[i].events;
+
+            for (let j = 0; j < selectedTasks.length; j++) {
+                document.querySelector("input[type='checkbox'][value='" + selectedTasks[j].task + "']")
+                document.querySelector("input[type='checkbox'][value='" + selectedTasks[j].task + "']").checked = true;
+            }
+
         }
 
     }
@@ -457,14 +465,20 @@ function updateProfileTask() {
 
         if (e.checked) {
             console.log("e.checked: " + e.checked + " - e.value " + e.value);
-            selectedTasks.push({ user: activeUser, task: e.value });
+            // selectedTasks.push({ user: activeUser, task: e.value });
+
+
+            for (let i = 0; i < guestData.length; i++) {
+                if (activeUser === guestData[i].email) {
+                    guestData[i].events.push({ user: activeUser, task: e.value, seat: "N/A" })
+                }
+            }
+
+
+
         }
-
-        localStorage.setItem("selectedTasks", JSON.stringify(selectedTasks));
-
-
 
     });
 
-
+    localStorage.setItem("guestData", JSON.stringify(guestData));
 }
