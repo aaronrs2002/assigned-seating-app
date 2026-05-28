@@ -119,6 +119,17 @@ function selectProfile() {
 
         document.querySelector("select[name='accountsTarget']").innerHTML = accountsTargetHTML;
 
+        let seatAssignmentHTML = "";
+
+        if (activeUser === guestData[whichProfile].email) {
+            for (let i = 0; i < guestData[whichProfile].events.length; i++) {
+                seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><input type="text" class="form-control" name="${guestData[whichProfile].events[i].task}-seat" placeholder="Assigned Seat for ${guestData[whichProfile].events[i].task}"/></li>`
+            }
+        }
+
+
+        document.getElementById("seatAssignment").innerHTML = seatAssignmentHTML;
+
     }
 
     addEdit('profile', 'edit');
@@ -459,7 +470,9 @@ function selectEvent() {
 
 
 function updateProfileTask() {
+    let seatAssignmentHTML = "";
 
+    let usedAssigned = [];
 
     [].forEach.call(document.querySelectorAll("input[name='taskItem']"), (e) => {
 
@@ -470,7 +483,12 @@ function updateProfileTask() {
 
             for (let i = 0; i < guestData.length; i++) {
                 if (activeUser === guestData[i].email) {
-                    guestData[i].events.push({ user: activeUser, task: e.value, seat: "N/A" })
+                    guestData[i].events.push({ user: activeUser, task: e.value, seat: "N/A" });
+                    if (usedAssigned.indexOf(e.value) === -1) {
+                        seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><input type="text" class="form-control" name="${e.value}-seat" placeholder="Assigned Seat ${e.value}"/></li>`;
+                        usedAssigned.push(e.value);
+                    }
+
                 }
             }
 
@@ -479,6 +497,20 @@ function updateProfileTask() {
         }
 
     });
+
+    document.getElementById("seatAssignment").innerHTML = seatAssignmentHTML;
+
+
+
+    /* for (let i = 0; i < guestData.length; i++) {
+         if (activeUser === guestData[i].email) {
+             for (let j = 0; j < guestData[i].events.length; i++) {
+                 seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><input type="text" class="form-control" name="${guestData[i].events[j].task}-seat" placeholder="Assigned Seat"/></li>`;
+             }
+         }
+     }*/
+
+
 
     localStorage.setItem("guestData", JSON.stringify(guestData));
 }
