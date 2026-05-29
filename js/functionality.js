@@ -222,6 +222,15 @@ function buildProfile() {
 
 function editProfile() {
     let whichProfile = document.querySelector("select[name='guestList']").value;
+
+    for (let i = 0; i < guestData[whichProfile].events.length; i++) {
+        console.log("guestData[whichProfile].events[i].seat: " + guestData[whichProfile].events[i].seat)
+
+        guestData[whichProfile].events[i].seat = document.querySelector("input[name='" + guestData[whichProfile].events[i].seat + "-seat']").value;
+    }
+
+
+
     guestData[whichProfile].fName = document.querySelector("[name='fName']").value;
     guestData[whichProfile].lName = document.querySelector("[name='lName']").value;
     guestData[whichProfile].phone = document.querySelector("[name='phone']").value;
