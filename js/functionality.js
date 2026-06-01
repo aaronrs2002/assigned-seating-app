@@ -226,7 +226,7 @@ function editProfile() {
     for (let i = 0; i < guestData[whichProfile].events.length; i++) {
         console.log("guestData[whichProfile].events[i].seat: " + guestData[whichProfile].events[i].seat)
 
-        guestData[whichProfile].events[i].seat = document.querySelector("input[name='" + guestData[whichProfile].events[i].seat + "-seat']").value;
+        guestData[whichProfile].events[i].seat = document.querySelector("input[name='" + guestData[whichProfile].events[i].task + "-seat']").value;
     }
 
 
