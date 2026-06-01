@@ -531,6 +531,3 @@ function updateProfileTask() {
     localStorage.setItem("guestData", JSON.stringify(guestData));
 }
 
-/*
-[{ "fName": "Aaron", "lName": "Smith", "phone": "222-222-2222", "email": "test@email.com", "guestImg": "https://avatars.githubusercontent.com/u/3018791?v=4", "events": [{ "user": "test@email.com", "task": "fix running toilet", "seat": "N/A" }, { "user": "test@email.com", "task": "pool chlorine", "seat": "N/A" }, { "user": "test@email.com", "task": "update pool", "seat": "N/A" }] }]
-     */
