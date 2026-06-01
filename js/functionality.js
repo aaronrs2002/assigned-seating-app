@@ -495,23 +495,24 @@ function updateProfileTask() {
             console.log("e.checked: " + e.checked + " - e.value " + e.value);
             // selectedTasks.push({ user: activeUser, task: e.value });
 
+            seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><input type="text" class="form-control" name="${e.value}-seat" placeholder="Assigned Seat ${e.value}"/></li>`;
 
-            for (let i = 0; i < guestData.length; i++) {
-                if (activeUser === guestData[i].email) {
-                    guestData[i].events.push({ user: activeUser, task: e.value, seat: "N/A" });
-                    if (usedAssigned.indexOf(e.value) === -1) {
-                        seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><input type="text" class="form-control" name="${e.value}-seat" placeholder="Assigned Seat ${e.value}"/></li>`;
-                        usedAssigned.push(e.value);
-                    }
-
-                }
-            }
-
-
+            usedAssigned.push({ user: activeUser, task: e.value, seat: "N/A" });
 
         }
 
     });
+    for (let i = 0; i < guestData.length; i++) {
+        if (activeUser === guestData[i].email) {
+
+
+            guestData[i].events = usedAssigned;
+
+
+
+
+        }
+    }
 
     document.getElementById("seatAssignment").innerHTML = seatAssignmentHTML;
 
@@ -529,3 +530,7 @@ function updateProfileTask() {
 
     localStorage.setItem("guestData", JSON.stringify(guestData));
 }
+
+/*
+[{ "fName": "Aaron", "lName": "Smith", "phone": "222-222-2222", "email": "test@email.com", "guestImg": "https://avatars.githubusercontent.com/u/3018791?v=4", "events": [{ "user": "test@email.com", "task": "fix running toilet", "seat": "N/A" }, { "user": "test@email.com", "task": "pool chlorine", "seat": "N/A" }, { "user": "test@email.com", "task": "update pool", "seat": "N/A" }] }]
+     */
