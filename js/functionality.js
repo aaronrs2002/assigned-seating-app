@@ -212,7 +212,7 @@ function buildProfile() {
     }];
 
     localStorage.setItem("guestData", JSON.stringify(guestData));
-    clearForms();
+    // clearForms();
     buildSelectMenu();
 
 }
@@ -223,6 +223,8 @@ function buildProfile() {
 function editProfile() {
     let whichProfile = document.querySelector("select[name='guestList']").value;
 
+    console.log("whichProfile: " + whichProfile);
+    console.log("JSON.stringify(guestData): " + JSON.stringify(guestData));
     for (let i = 0; i < guestData[whichProfile].events.length; i++) {
         console.log("guestData[whichProfile].events[i].seat: " + guestData[whichProfile].events[i].seat)
 
@@ -239,9 +241,13 @@ function editProfile() {
     guestData[whichProfile].events = guestData[whichProfile].events;
 
     localStorage.setItem("guestData", JSON.stringify(guestData));
-    // clearForms();
+    clearForms();
     globalAlert("alert-success", guestData[whichProfile].fName + "'s profile has been updated.");
     buildSelectMenu();
+    document.getElementById("taskListTarget").innerHTML = "";
+    document.getElementById("seatAssignment").innerHTML = "";
+    document.getElementById("guestImgTarget").innerHTML = "";
+    document.getElementById("nameTarget").innerHTML = "";
 
 }
 
@@ -457,7 +463,7 @@ function updateEvent(addEdit) {
     localStorage.setItem("eventObj", JSON.stringify(eventObj));
 
     globalAlert("alert-success", addEdit + " was successful!");
-    clearForms();
+    //clearForms();
 
 }
 
@@ -507,9 +513,12 @@ function updateProfileTask() {
     });
     for (let i = 0; i < guestData.length; i++) {
         if (activeUser === guestData[i].email) {
+
             guestData[i].events = usedAssigned;
         }
     }
+
+
     document.getElementById("seatAssignment").innerHTML = "";
     document.getElementById("seatAssignment").innerHTML = seatAssignmentHTML;
     localStorage.setItem("guestData", JSON.stringify(guestData));
