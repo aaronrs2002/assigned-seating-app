@@ -239,7 +239,8 @@ function editProfile() {
     guestData[whichProfile].events = guestData[whichProfile].events;
 
     localStorage.setItem("guestData", JSON.stringify(guestData));
-    clearForms();
+    // clearForms();
+    globalAlert("alert-success", guestData[whichProfile].fName + "'s profile has been updated.");
     buildSelectMenu();
 
 }
@@ -484,52 +485,33 @@ function selectEvent() {
 
 
 function updateProfileTask() {
-    document.getElementById("seatAssignment").innerHTML = "";
     let seatAssignmentHTML = "";
-
     let usedAssigned = [];
 
     [].forEach.call(document.querySelectorAll("input[name='taskItem']"), (e) => {
-
         if (e.checked) {
-            console.log("e.checked: " + e.checked + " - e.value " + e.value);
-            // selectedTasks.push({ user: activeUser, task: e.value });
-
-            seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><label>${e.value}</label><input type="text" class="form-control" name="${e.value}-seat" placeholder="Assigned Seat ${e.value}"/></li>`;
-
+            let seatVal = "N/A";
+            try {
+                if (document.querySelector("input[name='" + e.value + "-seat']").value) {
+                    seatVal = document.querySelector("input[name='" + e.value + "-seat']").value;
+                }
+            } catch (error) {
+                console.log("Seat input available yet");
+            }
             usedAssigned.push({
-                user: activeUser, task: e.value, seat: document.querySelector("input[name='" + e.value + "-seat']").value
+                user: activeUser, task: e.value, seat: seatVal
             });
-
+            seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><label>${e.value}</label><input type="text" class="form-control" value="${seatVal}" name="${e.value}-seat" placeholder="Assigned Seat ${e.value}"/></li>`;
         }
 
     });
     for (let i = 0; i < guestData.length; i++) {
         if (activeUser === guestData[i].email) {
-
-
             guestData[i].events = usedAssigned;
-
-
-
-
         }
     }
-
+    document.getElementById("seatAssignment").innerHTML = "";
     document.getElementById("seatAssignment").innerHTML = seatAssignmentHTML;
-
-
-
-    /* for (let i = 0; i < guestData.length; i++) {
-         if (activeUser === guestData[i].email) {
-             for (let j = 0; j < guestData[i].events.length; i++) {
-                 seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><input type="text" class="form-control" name="${guestData[i].events[j].task}-seat" placeholder="Assigned Seat"/></li>`;
-             }
-         }
-     }*/
-
-
-
     localStorage.setItem("guestData", JSON.stringify(guestData));
 }
 
