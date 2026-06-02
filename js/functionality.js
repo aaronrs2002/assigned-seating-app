@@ -125,7 +125,7 @@ function selectProfile() {
         if (activeUser === guestData[whichProfile].email) {
             for (let i = 0; i < guestData[whichProfile].events.length; i++) {
                 if (usedAssigned.indexOf(guestData[whichProfile].events[i].task) === -1) {
-                    seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><input type="text" class="form-control" name="${guestData[whichProfile].events[i].task}-seat" placeholder="Assigned Seat for ${guestData[whichProfile].events[i].task}"/></li>`
+                    seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><label>${guestData[whichProfile].events[i].task}</label><input type="text" class="form-control" name="${guestData[whichProfile].events[i].task}-seat" value="${guestData[whichProfile].events[i].seat}" placeholder="Assigned Seat for ${guestData[whichProfile].events[i].task}"/></li>`
 
                     usedAssigned.push(guestData[whichProfile].events[i].task);
                 }
@@ -495,9 +495,11 @@ function updateProfileTask() {
             console.log("e.checked: " + e.checked + " - e.value " + e.value);
             // selectedTasks.push({ user: activeUser, task: e.value });
 
-            seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><input type="text" class="form-control" name="${e.value}-seat" placeholder="Assigned Seat ${e.value}"/></li>`;
+            seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><label>${e.value}</label><input type="text" class="form-control" name="${e.value}-seat" placeholder="Assigned Seat ${e.value}"/></li>`;
 
-            usedAssigned.push({ user: activeUser, task: e.value, seat: "N/A" });
+            usedAssigned.push({
+                user: activeUser, task: e.value, seat: document.querySelector("input[name='" + e.value + "-seat']").value
+            });
 
         }
 
