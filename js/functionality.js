@@ -486,6 +486,26 @@ function selectEvent() {
     document.querySelector("textarea[name='eventDetails']").value = eventObj[whichEvent].taskDetails;
 
 
+    let seatingHTML = "";
+
+    console.log("JSON.stringify(guestData): " + JSON.stringify(guestData) + " (typeof guestData): " + (typeof guestData));
+
+    for (let i = 0; i < guestData.length; i++) {
+        console.log("guestData[i].events.length: " + guestData[i].events.length)
+        for (let j = 0; j < guestData[i].events.length; j++) {
+
+            console.log("j: " + j)
+            console.log("guestData[i].events[j].task: " + guestData[i].events[j].task);
+            console.log("eventObj[whichEvent].task: " + eventObj[whichEvent].task);
+            if (guestData[i].events[j].task === eventObj[whichEvent].task) {
+                seatingHTML = seatingHTML + `<li class="list-group-item">${guestData[i].fName + " " + guestData[i].lName + " seat: " + guestData[i].events[j].seat}</li>`
+            }
+        }
+
+    }
+
+    document.getElementById("seatingTarget").innerHTML = seatingHTML;
+
 }
 
 
