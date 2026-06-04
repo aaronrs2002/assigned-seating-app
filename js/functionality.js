@@ -125,7 +125,9 @@ function selectProfile() {
         if (activeUser === guestData[whichProfile].email) {
             for (let i = 0; i < guestData[whichProfile].events.length; i++) {
                 if (usedAssigned.indexOf(guestData[whichProfile].events[i].task) === -1) {
-                    seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><label>${guestData[whichProfile].events[i].task}</label><input type="text" class="form-control" name="${guestData[whichProfile].events[i].task}-seat" value="${guestData[whichProfile].events[i].seat}" placeholder="Assigned Seat for ${guestData[whichProfile].events[i].task}"/></li>`
+                    seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><label>${guestData[whichProfile].events[i].task} seat</label><input type="text" class="form-control" name="${guestData[whichProfile].events[i].task}-seat" value="${guestData[whichProfile].events[i].seat}" placeholder="Assigned Seat for ${guestData[whichProfile].events[i].task}"/>
+                    <div><label>${guestData[whichProfile].events[i].task} Detials</label><textarea class="form-control" name="${guestData[whichProfile].events[i].task}-details" value="${guestData[whichProfile].events[i].details}"></textarea> </div>
+                    </li>`
 
                     usedAssigned.push(guestData[whichProfile].events[i].task);
                 }
@@ -212,8 +214,9 @@ function buildProfile() {
     }];
 
     localStorage.setItem("guestData", JSON.stringify(guestData));
-    // clearForms();
+    clearForms();
     buildSelectMenu();
+    globalAlert("alert-success", document.querySelector("[name='fName']").value + "'s profile has been added.");
 
 }
 
@@ -229,6 +232,7 @@ function editProfile() {
         console.log("guestData[whichProfile].events[i].seat: " + guestData[whichProfile].events[i].seat)
 
         guestData[whichProfile].events[i].seat = document.querySelector("input[name='" + guestData[whichProfile].events[i].task + "-seat']").value;
+        guestData[whichProfile].events[i].details = document.querySelector("textarea[name='" + guestData[whichProfile].events[i].task + "-details']").value;
     }
 
 
@@ -498,7 +502,7 @@ function selectEvent() {
             console.log("guestData[i].events[j].task: " + guestData[i].events[j].task);
             console.log("eventObj[whichEvent].task: " + eventObj[whichEvent].task);
             if (guestData[i].events[j].task === eventObj[whichEvent].task) {
-                seatingHTML = seatingHTML + `<li class="list-group-item">${guestData[i].fName + " " + guestData[i].lName + " seat: " + guestData[i].events[j].seat}</li>`
+                seatingHTML = seatingHTML + `<li class="list-group-item">${guestData[i].email + " seat: " + guestData[i].events[j].seat}</li>`
             }
         }
 
@@ -512,11 +516,13 @@ function selectEvent() {
 
 function updateProfileTask() {
     let seatAssignmentHTML = "";
+    let detailsHTML = "";
     let usedAssigned = [];
 
     [].forEach.call(document.querySelectorAll("input[name='taskItem']"), (e) => {
         if (e.checked) {
             let seatVal = "N/A";
+            let detailsVal = "No details yet";
             try {
                 if (document.querySelector("input[name='" + e.value + "-seat']").value) {
                     seatVal = document.querySelector("input[name='" + e.value + "-seat']").value;
@@ -524,10 +530,22 @@ function updateProfileTask() {
             } catch (error) {
                 console.log("Seat input available yet");
             }
+
+            /*startdetails*/
+
+            try {
+                if (document.querySelector("textarea[name='" + e.value + "-details']").value) {
+                    detailsVal = document.querySelector("textarea[name='" + e.value + "-details']").value;
+                }
+            } catch (error) {
+                console.log("No Details available yet");
+            }
             usedAssigned.push({
-                user: activeUser, task: e.value, seat: seatVal
+                user: activeUser, task: e.value, seat: seatVal, details: detailsVal
             });
-            seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><label>${e.value}</label><input type="text" class="form-control" value="${seatVal}" name="${e.value}-seat" placeholder="Assigned Seat ${e.value}"/></li>`;
+            seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><label>${e.value} seat</label><input type="text" class="form-control" value="${seatVal}" name="${e.value}-seat" placeholder="Assigned Seat ${e.value}"/>
+            <div><label>${e.value} Details</label><textarea name="${e.value}-details" value="${detailsVal}" class="form-control"></textarea> </div>
+            </li>`;
         }
 
     });
@@ -544,3 +562,10 @@ function updateProfileTask() {
     localStorage.setItem("guestData", JSON.stringify(guestData));
 }
 
+
+/*
+
+[{"fName":"Aaron","lName":"Smith","phone":"222-222-2222","email":"test@email.com","guestImg":"https://avatars.githubusercontent.com/u/3018791?v=4","events":[{"user":"test@email.com","task":"update pool","seat":"A12"},{"user":"test@email.com","task":"pool chlorine","seat":"B13"},{"user":"test@email.com","task":"landscape fabric/plastic weed barrier","seat":"C14"},{"user":"test@email.com","task":"get couch re-apolstered","seat":"Z17"}]},{"fName":"Hank","lName":"Smith","phone":"335-0148","email":"hank@email.com","guestImg":"https://lh3.googleusercontent.com/pw/ACtC-3cf2wb-cj3Jy9XTrAq_7U2qAw-c5OZDibRAwWVbZdmLR3CCitIsYnUfELekhASLdHVIeSkz-SFmZqqQoW_jKASpCryqsHWdMECcMQedGETCeW7jKmzi3pL3P3TCkab2TS1NYXA_mRY6_Rb1bCYGCq7zYA=w1064-h798-no?authuser=0","events":[]}]
+
+
+*/
