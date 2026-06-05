@@ -6,3 +6,23 @@
     border-radius: 50%;
 
 }
+
+body.wLogo:after {
+    content: "";
+    background: linear-gradient(to top, rgb(47, 61, 47), #f8f8f8);
+    position: fixed;
+    z-index: -1;
+
+
+    top: 10px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://web-presence.biz/img/MA_Logo.png");
+    background-repeat: no-repeat;
+    background-position: top left;
+
+    filter: grayscale(100%);
+    opacity: .2;
+
+}
