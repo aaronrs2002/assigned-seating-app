@@ -182,8 +182,10 @@ function selectProfile() {
             let selectedTasks = guestData[i].events;
 
             for (let j = 0; j < selectedTasks.length; j++) {
-                document.querySelector("input[type='checkbox'][value='" + selectedTasks[j].task + "']")
-                document.querySelector("input[type='checkbox'][value='" + selectedTasks[j].task + "']").checked = true;
+                if (document.querySelector("input[type='checkbox'][value='" + selectedTasks[j].task + "']")) {
+                    document.querySelector("input[type='checkbox'][value='" + selectedTasks[j].task + "']").checked = true;
+                }
+
             }
 
         }
