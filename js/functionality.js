@@ -125,7 +125,7 @@ function selectProfile() {
         if (activeUser === guestData[whichProfile].email) {
             for (let i = 0; i < guestData[whichProfile].events.length; i++) {
                 if (usedAssigned.indexOf(guestData[whichProfile].events[i].task) === -1) {
-                    seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><label>${guestData[whichProfile].events[i].task}: seat</label><input type="text" class="form-control" name="${guestData[whichProfile].events[i].task}-seat" value="${guestData[whichProfile].events[i].seat}" placeholder="Assigned Seat for ${guestData[whichProfile].events[i].task}"/>
+                    seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><i class="fas fa-trash" onClick="deleteTask('${guestData[whichProfile].events[i].task}')"></i> - <label>${guestData[whichProfile].events[i].task}: seat</label><input type="text" class="form-control" name="${guestData[whichProfile].events[i].task}-seat" value="${guestData[whichProfile].events[i].seat}" placeholder="Assigned Seat for ${guestData[whichProfile].events[i].task}"/>
                     <div><label>${guestData[whichProfile].events[i].task} Detials</label><textarea class="form-control" name="${guestData[whichProfile].events[i].task}-details" >${guestData[whichProfile].events[i].details}</textarea> </div>
                     </li>`
 
@@ -543,7 +543,7 @@ function updateProfileTask() {
             usedAssigned.push({
                 user: activeUser, task: e.value, seat: seatVal, details: detailsVal
             });
-            seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><label>${e.value}: seat</label><input type="text" class="form-control" value="${seatVal}" name="${e.value}-seat" placeholder="Assigned Seat ${e.value}"/>
+            seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><i class="fas fa-trash" onClick="deleteTask('${e.value}'"></i> - <label>${e.value}: seat</label><input type="text" class="form-control" value="${seatVal}" name="${e.value}-seat" placeholder="Assigned Seat ${e.value}"/>
             <div><label>${e.value} Details</label><textarea name="${e.value}-details" class="form-control">${detailsVal}</textarea> </div>
             </li>`;
         }
@@ -569,3 +569,24 @@ function updateProfileTask() {
 
 
 */
+
+function deleteTask(task) {
+
+    document.querySelector("#taskListTarget input[type='checkbox'][value='" + task + "']").checked = false;
+    updateProfileTask();
+    /*Run this in case it doesn't exist in the taks checkbox list*/
+    let whichProfile = document.querySelector("select[name='guestList']").value;
+    if (whichProfile === "default") {
+        return false;
+    }
+    let tempTasks = [];
+
+    for (let i = 0; i < guestData[whichProfile].events.length; i++) {
+        if (guestData[whichProfile].events[i].task !== task) {
+            tempTasks.push(guestData[whichProfile].events[i]);
+        }
+    }
+    guestData[whichProfile].events = tempTasks;
+    globalAlert("alert-success", task + " deleted.");
+    console.log("JSON.stringify(guestData[whichProfile].events): " + JSON.stringify(guestData[whichProfile].events));
+}
