@@ -588,5 +588,5 @@ function deleteTask(task) {
     }
     guestData[whichProfile].events = tempTasks;
     globalAlert("alert-success", task + " deleted.");
-    console.log("JSON.stringify(guestData[whichProfile].events): " + JSON.stringify(guestData[whichProfile].events));
+
 }
