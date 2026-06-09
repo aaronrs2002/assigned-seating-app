@@ -571,9 +571,11 @@ function updateProfileTask() {
 */
 
 function deleteTask(task) {
+    if (document.querySelector("#taskListTarget input[type='checkbox'][value='" + task + "']")) {
+        document.querySelector("#taskListTarget input[type='checkbox'][value='" + task + "']").checked = false;
+        updateProfileTask();
+    }
 
-    document.querySelector("#taskListTarget input[type='checkbox'][value='" + task + "']").checked = false;
-    updateProfileTask();
     /*Run this in case it doesn't exist in the taks checkbox list*/
     let whichProfile = document.querySelector("select[name='guestList']").value;
     if (whichProfile === "default") {
