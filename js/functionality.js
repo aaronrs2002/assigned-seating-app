@@ -594,7 +594,6 @@ function deleteTask(task) {
     globalAlert("alert-success", task + " deleted.");
 
     localStorage.setItem("guestData", JSON.stringify(guestData));
-    console.log("JSON.stringify(guestData[whichProfile].events): " + JSON.stringify(guestData));
     selectProfile();
 
 }
