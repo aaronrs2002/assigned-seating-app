@@ -2,6 +2,45 @@ let guestData = [];
 let activeUser = "";
 
 
+const ValidateProfile = (fields) => {
+    /*const letterOnly = /^[a-zA-Z\s-.]*$/;
+    const numOnly = /^[0-9-().+]+$/;*/
+    [].forEach.call(document.querySelectorAll(".error"), (e) => {
+        e.classList.remove("error")
+    })
+
+    for (let i = 0; i < fields.length; i++) {//validate each field in array with a loop
+        let value = "";
+        if (document.querySelector("[name='" + fields[i] + "']").value.length > 0) {
+            console.log("The new value1: " + document.querySelector("[name='" + fields[i] + "']").value)
+        } else {
+            document.querySelector("[name='" + fields[i] + "']").classList.add("error");
+        }
+
+        if (fields[i] === "email") {//XX@XX.XX format required
+            email = document.querySelector("[name='" + fields[i] + "']").value;
+            email = email.toLowerCase();
+            var atpos = email.indexOf("@");
+            var dotpos = email.lastIndexOf(".");
+            if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length) {
+                document
+                    .querySelector("[name='" + fields[i] + "']")
+                    .classList.add("error");
+            } //end if
+        }
+    }
+
+
+
+
+    if (document.querySelector(".error") !== null) {
+        globalAlert("alert-warning", "there are errors in your form.");
+        return false;
+    }
+}
+
+
+
 function clearForms() {
     [].forEach.call(document.querySelectorAll("input[type='text']"), (e) => {
         e.value = "";
@@ -197,6 +236,13 @@ function selectProfile() {
 
 
 function buildProfile() {
+    ValidateProfile(["fName", "lName", "phone", "email", "guestImg"]);
+    if (document.querySelector(".error")) {
+        console.log("we just check validate")
+        return false;
+    } else {
+        console.log("There were no errors in your form.")
+    }
 
     if (localStorage.getItem("guestData")) {
         guestData = localStorage.getItem("guestData")
@@ -216,9 +262,10 @@ function buildProfile() {
     }];
 
     localStorage.setItem("guestData", JSON.stringify(guestData));
-    clearForms();
+
     buildSelectMenu();
     globalAlert("alert-success", document.querySelector("[name='fName']").value + "'s profile has been added.");
+    clearForms();
 
 }
 
@@ -226,6 +273,15 @@ function buildProfile() {
 
 
 function editProfile() {
+
+    ValidateProfile(["fName", "lName", "phone", "email", "guestImg"]);
+    if (document.querySelector(".error")) {
+        console.log("we just check validate")
+        return false;
+    }
+
+
+
     let whichProfile = document.querySelector("select[name='guestList']").value;
 
     console.log("whichProfile: " + whichProfile);
@@ -254,6 +310,7 @@ function editProfile() {
     document.getElementById("seatAssignment").innerHTML = "";
     document.getElementById("guestImgTarget").innerHTML = "";
     document.getElementById("nameTarget").innerHTML = "";
+
 
 }
 
@@ -418,7 +475,7 @@ if (localStorage.getItem("taskList")) {
 buildEventMenu(eventObj);
 
 function updateEvent(addEdit) {
-    let whichEvent = document.querySelector("[name='eventList']").value;
+
 
 
     switch (addEdit) {
@@ -597,3 +654,10 @@ function deleteTask(task) {
     selectProfile();
 
 }
+
+
+
+/*
+
+[{ "fName": "Aaron", "lName": "Smith", "phone": "222-222-2222", "email": "test@email.com", "guestImg": "https://avatars.githubusercontent.com/u/3018791?v=4", "events": [{ "user": "test@email.com", "task": "landscape fabric/plastic weed barrier", "seat": "C14", "details": "No details yet" }, { "user": "test@email.com", "task": "get couch re-apolstered", "seat": "Z17", "details": "No details yet" }] }, { "fName": "Hank", "lName": "Smith", "phone": "335-0148", "email": "hank@email.com", "guestImg": "https://lh3.googleusercontent.com/pw/ACtC-3cf2wb-cj3Jy9XTrAq_7U2qAw-c5OZDibRAwWVbZdmLR3CCitIsYnUfELekhASLdHVIeSkz-SFmZqqQoW_jKASpCryqsHWdMECcMQedGETCeW7jKmzi3pL3P3TCkab2TS1NYXA_mRY6_Rb1bCYGCq7zYA=w1064-h798-no?authuser=0", "events": [{ "user": "hank@email.com", "task": "pool chlorine", "seat": "B12" }] }, { "fName": "Georgia", "lName": "Florez", "phone": "231-7367", "email": "georgia@email.com", "guestImg": "https://lh3.googleusercontent.com/pw/ACtC-3eiDlCpmkI9sdmPA2SwJVbDME8Ju2fOlcKQ1s8ih7U-9tq9ppQ9g95H4N8sprBD4QxF5_WeQ1ThzGxgl3oYzhudS130tpQuTIfpvKFNIxPdO_sWZc1VzF16-NYmpTLcNnccDR9kZgwKRK63Grd3PmqPhw=w988-h741-no?authuser=0", "events": [{ "user": "georgia@email.com", "task": "pool chlorine", "seat": "C15" }] }, { "fName": "JR", "lName": "Pickins", "phone": "505-392-2299", "email": "jr@pickens.com", "guestImg": "https://lh3.googleusercontent.com/pw/ACtC-3fytF7wkhWxclwub7e0Lf7hLZyluOlBrvjfCZvPipTl2SuG1EsF-MRZBe-V1kJYYG3a7noebgX814zUb2Bhtp7brQLN4-FLXJTaN7sYyPSyA0sBjt0mPjd9-XDu2aRhi6HgWURbiAjOtVy-0SE1p7jusQ=w1064-h798-no?authuser=0", "events": [{ "user": "georgia@email.com", "task": "pool chlorine", "seat": "C15" }] }]
+*/

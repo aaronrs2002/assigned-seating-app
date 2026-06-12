@@ -10,3 +10,7 @@
 [class*="trash"] {
     cursor: pointer;
 }
+
+.error {
+    border: #ff0000 1px solid;
+}
