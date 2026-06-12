@@ -34,7 +34,7 @@ const ValidateProfile = (fields) => {
 
 
     if (document.querySelector(".error") !== null) {
-        globalAlert("alert-warning", "there are errors in your form.");
+        globalAlert("alert-warning", "There are errors in your form.");
         return false;
     }
 }
