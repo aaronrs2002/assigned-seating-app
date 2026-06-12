@@ -118,7 +118,7 @@ function selectProfile() {
             accountsTargetHTML = accountsTargetHTML + "<option value='" + accountsObj[i] + "'>" + accountsObj[i] + "</option>"
         }
 
-        document.querySelector("select[name='accountsTarget']").innerHTML = accountsTargetHTML;
+        /* document.querySelector("select[name='accountsTarget']").innerHTML = accountsTargetHTML;*/
 
         let seatAssignmentHTML = "";
 
