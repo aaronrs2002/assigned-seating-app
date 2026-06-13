@@ -187,6 +187,7 @@ function selectProfile() {
     addEdit('profile', 'edit');
 
 
+
     /*
     "events": [
         {
@@ -355,6 +356,10 @@ function selectAccount() {
 
 
 function addEdit(module, addEdit) {
+    [].forEach.call(document.querySelectorAll(".error"), (e) => {
+        e.classList.remove("error");
+    });
+
     if (module === "event" && addEdit === "add") {
         [].forEach.call(document.querySelectorAll("[data-module='event'][data-addedit='edit']"), (e) => {
             e.classList.add("hide");
