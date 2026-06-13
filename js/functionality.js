@@ -59,7 +59,7 @@ function buildEventMenu(eventObj) {
     let tempEventList = [];
 
     for (let i = 0; i < eventObj.length; i++) {
-        if (tempEventList.indexOf(eventObj[i].task === -1)) {
+        if (tempEventList.indexOf(eventObj[i].task) === -1) {
             eventObjHTML = eventObjHTML + "<option value='" + i + "'>" + eventObj[i].task + "</option>";
             tempEventList.push(eventObj[i].task);
         }
