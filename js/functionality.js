@@ -476,6 +476,10 @@ buildEventMenu(eventObj);
 
 function updateEvent(addEdit) {
 
+    let whichEvent = document.querySelector("select[name='eventList']").value;
+    if (whichEvent === "default") {
+        return false;
+    }
 
 
     switch (addEdit) {
