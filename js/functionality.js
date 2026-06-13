@@ -56,8 +56,14 @@ function clearForms() {
 function buildEventMenu(eventObj) {
     let eventObjHTML = "<option value='default'>Select Event</option>";
 
+    let tempEventList = [];
+
     for (let i = 0; i < eventObj.length; i++) {
-        eventObjHTML = eventObjHTML + "<option value='" + i + "'>" + eventObj[i].task + "</option>";
+        if (tempEventList.indexOf(eventObj[i].task === -1)) {
+            eventObjHTML = eventObjHTML + "<option value='" + i + "'>" + eventObj[i].task + "</option>";
+            tempEventLiust.push(eventObj[i].task);
+        }
+
     }
 
     document.querySelector("select[name='eventList']").innerHTML = eventObjHTML;
