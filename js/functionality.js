@@ -579,7 +579,7 @@ function selectEvent() {
             console.log("eventObj[whichEvent].task: " + eventObj[whichEvent].task);
             if (guestData[i].events[j].task === eventObj[whichEvent].task) {
                 seatingHTML = seatingHTML + `<li class="list-group-item"> <i class="fas fa-trash" onClick="deleteTask('${eventObj[whichEvent].task}','${guestData[i].email}')"></i> ${guestData[i].email + " seat: " + guestData[i].events[j].seat}</li>
-                <li class="list-group-item list-group-item-action list-group-item-info">${guestData[i].events[j].details}</li>`
+                <li class="list-group-item list-group-item-action list-group-item-dark">${guestData[i].events[j].details}</li>`
             }
         }
 
