@@ -381,8 +381,8 @@ function addEdit(module, addEdit) {
         });
         globalAlert("alert-success", "Your in Edit Mode for events.");
     }
-    /*start profile*/
-    console.log("module: " + module + " - addEdit: " + addEdit);
+    /*start profile
+    console.log("module: " + module + " - addEdit: " + addEdit);*/
 
     if (module === "profile" && addEdit === "add") {
         [].forEach.call(document.querySelectorAll("[data-module='profile'][data-addedit='edit']"), (e) => {
@@ -541,7 +541,7 @@ function updateEvent(addEdit) {
     localStorage.setItem("eventObj", JSON.stringify(eventObj));
 
     globalAlert("alert-success", addEdit + " was successful!");
-    //clearForms();
+    clearForms();
 
 }
 
@@ -551,7 +551,7 @@ function selectEvent() {
 
 
     let whichEvent = document.querySelector("select[name='eventList']").value;
-
+    console.log("JSON.stringify(eventObj[whichEvent]): " + JSON.stringify(eventObj[whichEvent]));
 
     document.querySelector("[name='accountName']").value = eventObj[whichEvent].accountName;
     document.querySelector("[name='eventTitle']").value = eventObj[whichEvent].task;
@@ -576,7 +576,8 @@ function selectEvent() {
             console.log("guestData[i].events[j].task: " + guestData[i].events[j].task);
             console.log("eventObj[whichEvent].task: " + eventObj[whichEvent].task);
             if (guestData[i].events[j].task === eventObj[whichEvent].task) {
-                seatingHTML = seatingHTML + `<li class="list-group-item">${guestData[i].email + " seat: " + guestData[i].events[j].seat}</li>`
+                seatingHTML = seatingHTML + `<li class="list-group-item">${guestData[i].email + " seat: " + guestData[i].events[j].seat}</li>
+                <li class="list-group-item list-group-item-action list-group-item-info">${guestData[i].events[j].details}</li>`
             }
         }
 
