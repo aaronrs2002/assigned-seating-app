@@ -51,6 +51,7 @@ function clearForms() {
     [].forEach.call(document.querySelectorAll("select"), (e) => {
         e.selectedIndex = 0;
     });
+    document.getElementById("seatingTarget").innerHTML = "";
 }
 
 function buildEventMenu(eventObj) {
@@ -67,6 +68,7 @@ function buildEventMenu(eventObj) {
     }
 
     document.querySelector("select[name='eventList']").innerHTML = eventObjHTML;
+
 }
 
 
@@ -170,7 +172,7 @@ function selectProfile() {
         if (activeUser === guestData[whichProfile].email) {
             for (let i = 0; i < guestData[whichProfile].events.length; i++) {
                 if (usedAssigned.indexOf(guestData[whichProfile].events[i].task) === -1) {
-                    seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><i class="fas fa-trash" onClick="deleteTask('${guestData[whichProfile].events[i].task}')"></i> - <label>${guestData[whichProfile].events[i].task}: seat</label><input type="text" class="form-control" name="${guestData[whichProfile].events[i].task}-seat" value="${guestData[whichProfile].events[i].seat}" placeholder="Assigned Seat for ${guestData[whichProfile].events[i].task}"/>
+                    seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><i class="fas fa-trash" onClick="deleteTask('${guestData[whichProfile].events[i].task}','${guestData[whichProfile].events[i].email}')"></i> - <label>${guestData[whichProfile].events[i].task}: seat</label><input type="text" class="form-control" name="${guestData[whichProfile].events[i].task}-seat" value="${guestData[whichProfile].events[i].seat}" placeholder="Assigned Seat for ${guestData[whichProfile].events[i].task}"/>
                     <div><label>${guestData[whichProfile].events[i].task} Detials</label><textarea class="form-control" name="${guestData[whichProfile].events[i].task}-details" >${guestData[whichProfile].events[i].details}</textarea> </div>
                     </li>`
 
@@ -183,7 +185,7 @@ function selectProfile() {
         document.getElementById("seatAssignment").innerHTML = seatAssignmentHTML;
 
     }
-
+    selectEvent()
     addEdit('profile', 'edit');
 
 
@@ -576,7 +578,7 @@ function selectEvent() {
             console.log("guestData[i].events[j].task: " + guestData[i].events[j].task);
             console.log("eventObj[whichEvent].task: " + eventObj[whichEvent].task);
             if (guestData[i].events[j].task === eventObj[whichEvent].task) {
-                seatingHTML = seatingHTML + `<li class="list-group-item">${guestData[i].email + " seat: " + guestData[i].events[j].seat}</li>
+                seatingHTML = seatingHTML + `<li class="list-group-item"> <i class="fas fa-trash" onClick="deleteTask('${eventObj[whichEvent].task}','${guestData[i].email}')"></i> ${guestData[i].email + " seat: " + guestData[i].events[j].seat}</li>
                 <li class="list-group-item list-group-item-action list-group-item-info">${guestData[i].events[j].details}</li>`
             }
         }
@@ -618,7 +620,7 @@ function updateProfileTask() {
             usedAssigned.push({
                 user: activeUser, task: e.value, seat: seatVal, details: detailsVal
             });
-            seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><i class="fas fa-trash" onClick="deleteTask('${e.value}'"></i> - <label>${e.value}: seat</label><input type="text" class="form-control" value="${seatVal}" name="${e.value}-seat" placeholder="Assigned Seat ${e.value}"/>
+            seatAssignmentHTML = seatAssignmentHTML + `<li class="list-group-item"><i class="fas fa-trash" onClick="deleteTask('${e.value}','${activeUser}'"></i> - <label>${e.value}: seat</label><input type="text" class="form-control" value="${seatVal}" name="${e.value}-seat" placeholder="Assigned Seat ${e.value}"/>
             <div><label>${e.value} Details</label><textarea name="${e.value}-details" class="form-control">${detailsVal}</textarea> </div>
             </li>`;
         }
@@ -640,12 +642,10 @@ function updateProfileTask() {
 
 /*
 
-[{"fName":"Aaron","lName":"Smith","phone":"222-222-2222","email":"test@email.com","guestImg":"https://avatars.githubusercontent.com/u/3018791?v=4","events":[{"user":"test@email.com","task":"update pool","seat":"A12"},{"user":"test@email.com","task":"pool chlorine","seat":"B13"},{"user":"test@email.com","task":"landscape fabric/plastic weed barrier","seat":"C14"},{"user":"test@email.com","task":"get couch re-apolstered","seat":"Z17"}]},{"fName":"Hank","lName":"Smith","phone":"335-0148","email":"hank@email.com","guestImg":"https://lh3.googleusercontent.com/pw/ACtC-3cf2wb-cj3Jy9XTrAq_7U2qAw-c5OZDibRAwWVbZdmLR3CCitIsYnUfELekhASLdHVIeSkz-SFmZqqQoW_jKASpCryqsHWdMECcMQedGETCeW7jKmzi3pL3P3TCkab2TS1NYXA_mRY6_Rb1bCYGCq7zYA=w1064-h798-no?authuser=0","events":[]}]
-
 
 */
 
-function deleteTask(task) {
+function deleteTask(task, email) {
     if (document.querySelector("#taskListTarget input[type='checkbox'][value='" + task + "']")) {
         document.querySelector("#taskListTarget input[type='checkbox'][value='" + task + "']").checked = false;
         updateProfileTask();
@@ -653,8 +653,28 @@ function deleteTask(task) {
 
     /*Run this in case it doesn't exist in the taks checkbox list*/
     let whichProfile = document.querySelector("select[name='guestList']").value;
+
+    for (let i = 0; i < guestData.length; i++) {
+
+
+        if (whichProfile === i) {
+            console.log("Updating guestData[i].email: " + guestData[i].email);
+        }
+    }
+
+
+
+    console.log("whichProfile: " + whichProfile);
     if (whichProfile === "default") {
-        return false;
+        for (let i = 0; i < guestData.length; i++) {
+
+
+            if (guestData[i].email === email) {
+                whichProfile = i;
+                console.log("Updating guestData[i].email: " + guestData[i].email);
+            }
+        }
+
     }
     let tempTasks = [];
 
@@ -667,6 +687,7 @@ function deleteTask(task) {
     globalAlert("alert-success", task + " deleted.");
 
     localStorage.setItem("guestData", JSON.stringify(guestData));
+    selectEvent();
     selectProfile();
 
 }
