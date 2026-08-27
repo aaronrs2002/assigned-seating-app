@@ -52,6 +52,9 @@ function clearForms() {
         e.selectedIndex = 0;
     });
     document.getElementById("seatingTarget").innerHTML = "";
+
+    document.getElementById("guestImgTarget").innerHTML = "<img class='img-fluid' src='img/guests/profileImg.jpg' />";
+    document.getElementById("nameTarget").innerHTML = "";
 }
 
 function buildEventMenu(eventObj) {
