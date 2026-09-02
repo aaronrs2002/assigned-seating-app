@@ -556,6 +556,9 @@ function selectEvent() {
 
 
     let whichEvent = document.querySelector("select[name='eventList']").value;
+    if (whichEvent === "default") {
+        whichEvent = 0;
+    }
     console.log("JSON.stringify(eventObj[whichEvent]): " + JSON.stringify(eventObj[whichEvent]));
 
     document.querySelector("[name='accountName']").value = eventObj[whichEvent].accountName;
