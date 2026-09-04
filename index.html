@@ -220,6 +220,86 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-12 py-2">
+
+                <div class="d-grid gap-2">
+                    <button class="btn btn-info" onClick="javascript:
+                    [].forEach.call(document.querySelectorAll(`[data-toggle='info']`),(e)=>{
+                        e.classList.remove('hide');
+                    });
+                    document.querySelector(`[data-toggle='viewInstructionBt']`).classList.add('hide');
+                    
+                    " type="button" data-toggle="viewInstructionBt">View
+                        Instructions</button>
+                    <button class="btn btn-info hide" onClick="javascript:
+                    
+                     [].forEach.call(document.querySelectorAll(`[data-toggle='info']`),(e)=>{
+                        e.classList.add('hide');
+                    });
+                       document.querySelector(`[data-toggle='viewInstructionBt']`).classList.remove('hide');
+                    
+                    
+                    
+                    " type="button" data-toggle="info">Hide
+                        Instructions</button>
+                </div>
+
+                <div class="card hide" data-toggle="info">
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <h5 class="card-title">Javascript - Event and Profile modules
+                                </h5>
+                                <p>In this 20-minute JavaScript code walkthrough, I take a look at two new modules I've
+                                    added to my Task Master
+                                    application: the Event Module and Profile Module.</p>
+
+                                <p>Task Master is a vanilla JavaScript task-management application that stores task
+                                    data as JSON in localStorage. Rather
+                                    than creating separate sets of data for each new feature, these modules reuse the
+                                    existing Task Master data and present
+                                    it in new ways.</p>
+
+                                <p>The Event Module retrieves tasks stored by Task Master and displays them as
+                                    events, allowing existing task information
+                                    to become part of a broader event-management interface.</p>
+
+                                <p>The Profile Module takes this concept a step further by allowing tasks to be
+                                    associated with individual profiles. This
+                                    creates a relationship between people and tasks while continuing to work from the
+                                    same
+                                    locally stored data.</p>
+                                <ul>
+
+
+                                    <li>
+                                        GitHub: <a href=" https://github.com/aaronrs2002/profile-app"
+                                            target="_blank">hhttps://github.com/aaronrs2002/profile-app</a>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+
+                            <div class="col-md-6">
+
+
+                                <p>Instructions and code walk through:</p>
+                                <iframe width="90%" height="315" src="https://www.youtube.com/embed/0UaV_zguRBw"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
         </div>
     </main>
     <div class="hide alert fadeInUp" role="alert" id="globalAlert"></div>
