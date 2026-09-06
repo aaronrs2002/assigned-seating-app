@@ -55,6 +55,7 @@ function clearForms() {
 
     document.getElementById("guestImgTarget").innerHTML = "<img class='img-fluid' src='img/guests/profileImg.jpg' />";
     document.getElementById("nameTarget").innerHTML = "";
+    document.querySelector("button[data-addedit='edit'][data-module='event']").classList.add("hide");
 }
 
 function buildEventMenu(eventObj) {
@@ -559,6 +560,8 @@ function selectEvent() {
     if (whichEvent === "default") {
         whichEvent = 0;
     }
+
+
     console.log("JSON.stringify(eventObj[whichEvent]): " + JSON.stringify(eventObj[whichEvent]));
 
     document.querySelector("[name='accountName']").value = eventObj[whichEvent].accountName;
@@ -592,6 +595,12 @@ function selectEvent() {
     }
 
     document.getElementById("seatingTarget").innerHTML = seatingHTML;
+
+    if (document.querySelector("select[name='eventList']").value !== "default") {
+        document.querySelector("button[data-addedit='edit'][data-module='event']").classList.remove("hide");
+    } else {
+        clearForms();
+    }
 
 }
 

@@ -74,6 +74,10 @@
 
                         <div class="col-md-12">
                             <h1>Event Module</h1>
+                            <i>To create an event, go to <a href="https://aaronrs2002.github.io/task-master/?&amp;">the
+                                    Task Master</a> and
+                                create a task. Select the green "Build your own Task List" button to get started.</i>
+
 
                             <select class="form-control" name="eventList" onChange="selectEvent()" data-addedit="edit"
                                 data-module="event"></select>
@@ -122,14 +126,16 @@
                         </div>
                         <div class="col-md-12">
 
-                            <button class="btn btn-block btn-success py-2 mt-2" data-addedit="add" data-module="event"
-                                onClick="updateEvent('add')">Add
+                            <button class="btn btn-block btn-success py-2 mt-2 hide" data-addedit="add"
+                                data-module="event" onClick="updateEvent('add')">Add
                                 Event</button>
 
                             <button class="btn btn-block btn-success py-2 mt-2 hide" data-addedit="edit"
                                 data-module="event" onClick="updateEvent('edit')">Edit
                                 Event</button>
+
                         </div>
+
 
 
                     </div>
