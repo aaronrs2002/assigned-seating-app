@@ -746,13 +746,23 @@ function deleteEvent() {
         }
     }
 
+
+
     eventObj = tempEvents;
     localStorage.setItem("eventObj", JSON.stringify(eventObj));
+    console.log("JSON.stringify(eventObj): " + JSON.stringify(eventObj));
     buildEventMenu(eventObj);
     clearForms();
 
     document.querySelector(`[data-warning='deleteEventShow']`).classList.add('hide');
 
-    document.querySelector(`[data-warning='deleteEventBt']`).classList.remove('hide');
+    // document.querySelector(`[data-warning='deleteEventBt']`).classList.remove('hide');
 
 }
+
+/*
+
+
+[{"accountName":"","task":"new","startDate":"2025-11-02","eventTime":"","eventAddress":"","eventEmail":"","eventPhone":"","eventCoordinator":"","taskDetails":"new"},{"accountName":"","task":"dfdrgerab","startDate":"2025-11-06","eventTime":"","eventAddress":"","eventEmail":"","eventPhone":"","eventCoordinator":"","taskDetails":"No Details"},{"accountName":"","task":"new try task here","startDate":"2026-06-11","eventTime":"","eventAddress":"","eventEmail":"","eventPhone":"","eventCoordinator":"","taskDetails":"No Details"}]
+
+*/
