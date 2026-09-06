@@ -55,7 +55,14 @@ function clearForms() {
 
     document.getElementById("guestImgTarget").innerHTML = "<img class='img-fluid' src='img/guests/profileImg.jpg' />";
     document.getElementById("nameTarget").innerHTML = "";
-    document.querySelector("button[data-addedit='edit'][data-module='event']").classList.add("hide");
+
+
+    [].forEach.call(document.querySelectorAll("button[data-addedit='edit'][data-module='event']"), (e) => {
+        e.classList.add("hide");
+
+    });
+
+    // document.querySelector("button[data-addedit='edit'][data-module='event']").classList.add("hide");
 }
 
 function buildEventMenu(eventObj) {
@@ -597,14 +604,20 @@ function selectEvent() {
     document.getElementById("seatingTarget").innerHTML = seatingHTML;
 
     if (document.querySelector("select[name='eventList']").value !== "default") {
-        document.querySelector("button[data-addedit='edit'][data-module='event']").classList.remove("hide");
+        [].forEach.call(document.querySelectorAll("button[data-addedit='edit'][data-module='event']"), (e) => {
+
+            e.classList.remove("hide");
+        })
+
     } else {
-        document.querySelector("button[data-addedit='edit'][data-module='event']").classList.add("hide");
+        [].forEach.call(document.querySelectorAll("button[data-addedit='edit'][data-module='event']"), (e) => {
+            e.classList.add("hide");
+
+        });
+
     }
 
 }
-
-
 
 function updateProfileTask() {
     let seatAssignmentHTML = "";
@@ -656,8 +669,8 @@ function updateProfileTask() {
 
 
 /*
-
-
+ 
+ 
 */
 
 function deleteTask(task, email) {
@@ -708,3 +721,38 @@ function deleteTask(task, email) {
 }
 
 
+function deleteEvent() {
+
+    let activeEvent = document.querySelector("select[name='eventList']").value;
+    if (activeEvent === "default") {
+        console.log("default is the value");
+        return false;
+    } else {
+        console.log("activeEvent: " + activeEvent);
+    }
+    let eventObj = [];
+    let tempEvents = [];
+    if (localStorage.getItem("eventObj")) {
+        console.log("localStorage: " + localStorage.getItem("eventObj"))
+        eventObj = JSON.parse(localStorage.getItem("eventObj"));
+    } else {
+        globalAlert("alert-warning", "No events.");
+        return false;
+    }
+
+    for (let i = 0; i < eventObj.length; i++) {
+        if (i !== Number(activeEvent)) {
+            tempEvents.push(eventObj[i]);
+        }
+    }
+
+    eventObj = tempEvents;
+    localStorage.setItem("eventObj", JSON.stringify(eventObj));
+    buildEventMenu(eventObj);
+    clearForms();
+
+    document.querySelector(`[data-warning='deleteEventShow']`).classList.add('hide');
+
+    document.querySelector(`[data-warning='deleteEventBt']`).classList.remove('hide');
+
+}
