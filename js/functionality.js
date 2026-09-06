@@ -599,7 +599,7 @@ function selectEvent() {
     if (document.querySelector("select[name='eventList']").value !== "default") {
         document.querySelector("button[data-addedit='edit'][data-module='event']").classList.remove("hide");
     } else {
-        clearForms();
+        document.querySelector("button[data-addedit='edit'][data-module='event']").classList.add("hide");
     }
 
 }
